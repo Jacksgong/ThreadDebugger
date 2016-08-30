@@ -1,5 +1,8 @@
 language: android
 
+jdk:
+# build-tools 24.0.1 need jdk8 or above.
+- oraclejdk8
 android:
   components:
     # Ref https://github.com/travis-ci/travis-ci/issues/6260.
