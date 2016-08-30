@@ -20,7 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Jacksgong on 29/08/2016.
+ * The factory of the thread pool.
  */
 
 public class ThreadPools {
@@ -33,12 +33,16 @@ public class ThreadPools {
      * In this thread pool, it use the TransferQueue in {@link java.util.concurrent.SynchronousQueue}
      * to hold the normal command.
      *
-     * @param corePoolSize
-     * @param maximumPoolSize
-     * @param keepAliveTime
-     * @param unit
-     * @param prefixName
-     * @return
+     * @param corePoolSize    the number of threads to keep in the pool, even
+     *                        if they are idle.
+     * @param maximumPoolSize the maximum number of threads to allow in the
+     *                        pool.
+     * @param keepAliveTime   when the number of threads is greater than
+     *                        the core, this is the maximum time that excess idle threads
+     *                        will wait for new tasks before terminating.
+     * @param unit            the time unit for the {@code keepAliveTime} argument.
+     * @param prefixName      the prefix name of this thread pool.
+     * @return The executor of a new ExceedWait thread pool.
      */
     public static IExecutor newExceedWaitPool(int corePoolSize,
                                               int maximumPoolSize, long keepAliveTime, TimeUnit unit,
@@ -51,16 +55,21 @@ public class ThreadPools {
      * If the size of active command equal to the {@code maximumPoolSize}, the further command will
      * be discard.
      *
-     * @param corePoolSize
-     * @param maximumPoolSize
-     * @param keepAliveTime
-     * @param unit
-     * @param prefixName
-     * @return
+     * @param corePoolSize    the number of threads to keep in the pool, even
+     *                        if they are idle.
+     * @param maximumPoolSize the maximum number of threads to allow in the
+     *                        pool.
+     * @param keepAliveTime   when the number of threads is greater than
+     *                        the core, this is the maximum time that excess idle threads
+     *                        will wait for new tasks before terminating.
+     * @param unit            the time unit for the {@code keepAliveTime} argument.
+     * @param prefixName      the prefix name of this thread pool.
+     * @return The executor of a new ExceedDiscard thread pool.
      * @see java.util.concurrent.ThreadPoolExecutor.DiscardOldestPolicy
      */
-    public static IExecutor newExceedDiscardPool(int corePoolSize, int maximumPoolSize, long keepAliveTime,
-                                                 TimeUnit unit, String prefixName) {
+    public static IExecutor newExceedDiscardPool(int corePoolSize, int maximumPoolSize,
+                                                 long keepAliveTime, TimeUnit unit,
+                                                 String prefixName) {
         return new ThreadExecutor(new RealExecutors.
                 ExceedDiscard(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
     }
@@ -69,16 +78,21 @@ public class ThreadPools {
      * If the size of active command equal to the {@code maximumPoolSize}, the further command will
      * be executed immediately in the caller thread.
      *
-     * @param corePoolSize
-     * @param maximumPoolSize
-     * @param keepAliveTime
-     * @param unit
-     * @param prefixName
-     * @return
+     * @param corePoolSize    the number of threads to keep in the pool, even
+     *                        if they are idle.
+     * @param maximumPoolSize the maximum number of threads to allow in the
+     *                        pool.
+     * @param keepAliveTime   when the number of threads is greater than
+     *                        the core, this is the maximum time that excess idle threads
+     *                        will wait for new tasks before terminating.
+     * @param unit            the time unit for the {@code keepAliveTime} argument.
+     * @param prefixName      the prefix name of this thread pool.
+     * @return The executor of a new ExceedCallerRuns thread pool.
      * @see java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy
      */
-    public static IExecutor newExceedCallerRunsPool(int corePoolSize, int maximumPoolSize, long keepAliveTime,
-                                                    TimeUnit unit, String prefixName) {
+    public static IExecutor newExceedCallerRunsPool(int corePoolSize, int maximumPoolSize,
+                                                    long keepAliveTime, TimeUnit unit,
+                                                    String prefixName) {
         return new ThreadExecutor(new RealExecutors.
                 ExceedCallerRuns(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
     }
@@ -87,15 +101,20 @@ public class ThreadPools {
      * If the size of active command equal to the {@code maximumPoolSize}, the further command will
      * be executed immediately in the global temporary unbound thread pool.
      *
-     * @param corePoolSize
-     * @param maximumPoolSize
-     * @param keepAliveTime
-     * @param unit
-     * @param prefixName
-     * @return
+     * @param corePoolSize    the number of threads to keep in the pool, even
+     *                        if they are idle.
+     * @param maximumPoolSize the maximum number of threads to allow in the
+     *                        pool.
+     * @param keepAliveTime   when the number of threads is greater than
+     *                        the core, this is the maximum time that excess idle threads
+     *                        will wait for new tasks before terminating.
+     * @param unit            the time unit for the {@code keepAliveTime} argument.
+     * @param prefixName      the prefix name of this thread pool.
+     * @return The executor of a new ExceedCallImmediately thread pool.
      */
-    public static IExecutor newExceedCallImmediatelyPool(int corePoolSize, int maximumPoolSize, long keepAliveTime,
-                                                         TimeUnit unit, String prefixName) {
+    public static IExecutor newExceedCallImmediatelyPool(int corePoolSize, int maximumPoolSize,
+                                                         long keepAliveTime, TimeUnit unit,
+                                                         String prefixName) {
         return new ThreadExecutor(new RealExecutors.
                 ExceedCallImmediately(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
     }
@@ -103,8 +122,8 @@ public class ThreadPools {
     /**
      * The same to the {@link Executors#newSingleThreadExecutor()}.
      *
-     * @param prefixName
-     * @return
+     * @param prefixName the prefix name of this thread pool.
+     * @return The executor of a new Single thread pool.
      */
     public static IExecutor newSinglePool(String prefixName) {
         return new ThreadExecutor(new RealExecutors.Single(prefixName));
@@ -113,9 +132,9 @@ public class ThreadPools {
     /**
      * The same to the {@link Executors#newFixedThreadPool(int)}.
      *
-     * @param threadCount
-     * @param prefixName
-     * @return
+     * @param threadCount the number of threads in the pool.
+     * @param prefixName  the prefix name of this thread pool.
+     * @return The executor of a new Fixed thread pool.
      */
     public static IExecutor newFixedPool(int threadCount, String prefixName) {
         return new ThreadExecutor(new RealExecutors.Fixed(threadCount, prefixName));
@@ -124,10 +143,12 @@ public class ThreadPools {
     /**
      * The same to the {@link Executors#newCachedThreadPool()}.
      *
-     * @param keepAliveTime
-     * @param unit
-     * @param prefixName
-     * @return
+     * @param keepAliveTime when the number of threads is greater than
+     *                      the core, this is the maximum time that excess idle threads
+     *                      will wait for new tasks before terminating.
+     * @param unit          the time unit for the {@code keepAliveTime} argument.
+     * @param prefixName    the prefix name of this thread pool.
+     * @return the executor of a new Cached thread pool.
      */
     public static IExecutor newCachedPool(long keepAliveTime, TimeUnit unit, String prefixName) {
         return new ThreadExecutor(new RealExecutors.Cached(keepAliveTime, unit, prefixName));

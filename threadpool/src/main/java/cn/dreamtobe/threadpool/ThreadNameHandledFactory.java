@@ -19,6 +19,9 @@ package cn.dreamtobe.threadpool;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * The factory with handling the thread name.
+ */
 public class ThreadNameHandledFactory implements ThreadFactory {
 
     private final AtomicInteger mThreadNumber = new AtomicInteger(1);

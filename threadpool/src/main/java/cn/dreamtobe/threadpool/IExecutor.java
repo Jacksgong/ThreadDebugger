@@ -21,11 +21,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.RejectedExecutionException;
 
+/**
+ * The executor running command with exactly their own task-name.
+ */
 public interface IExecutor {
     /**
      * Executes the given {@code runnable} at some time in the feature.
      *
-     * @param name    the thread name.
+     * @param name    the name of the {@code command}.
      * @param command the runnable task.
      */
     void execute(String name, Runnable command);
@@ -35,13 +38,14 @@ public interface IExecutor {
      * representing that task. The Future's {@code get} method will
      * return the given result upon successful completion.
      *
-     * @param task   the task to submit
-     * @param result the result to return
-     * @param <T>    the type of the result
-     * @return a Future representing pending completion of the task
+     * @param name   the name of the {@code task}.
+     * @param task   the task to submit.
+     * @param result the result to return.
+     * @param <T>    the type of the result.
+     * @return a Future representing pending completion of the task.
      * @throws RejectedExecutionException if the task cannot be
      *                                    scheduled for execution
-     * @throws NullPointerException       if the task is null
+     * @throws NullPointerException       if the task is null.
      */
     <T> Future<T> submit(String name, Runnable task, T result);
 
@@ -50,11 +54,12 @@ public interface IExecutor {
      * representing that task. The Future's {@code get} method will
      * return {@code null} upon <em>successful</em> completion.
      *
-     * @param task the task to submit
-     * @return a Future representing pending completion of the task
+     * @param name the name of the {@code task}.
+     * @param task the task to submit.
+     * @return a Future representing pending completion of the task.
      * @throws RejectedExecutionException if the task cannot be
      *                                    scheduled for execution
-     * @throws NullPointerException       if the task is null
+     * @throws NullPointerException       if the task is null.
      */
     Future<?> submit(String name, Runnable task);
 
@@ -74,12 +79,13 @@ public interface IExecutor {
      * for example, {@link java.security.PrivilegedAction} to
      * {@link Callable} form so they can be submitted.
      *
-     * @param task the task to submit
-     * @param <T>  the type of the task's result
-     * @return a Future representing pending completion of the task
+     * @param name the name of the {@code task}.
+     * @param task the task to submit.
+     * @param <T>  the type of the task's result.
+     * @return a Future representing pending completion of the task.
      * @throws RejectedExecutionException if the task cannot be
      *                                    scheduled for execution
-     * @throws NullPointerException       if the task is null
+     * @throws NullPointerException       if the task is null.
      */
     <T> Future<T> submit(String name, Callable<T> task);
 
@@ -87,14 +93,6 @@ public interface IExecutor {
      * Removes this task from the executor's internal queue if it is
      * present, thus causing it not to be run if it has not already
      * started.
-     * <p>
-     * <p>This method may be useful as one part of a cancellation
-     * scheme.  It may fail to remove tasks that have been converted
-     * into other forms before being placed on the internal queue.
-     * For example, a task entered using {@code submit} might be
-     * converted into a form that maintains {@code Future} status.
-     * However, in such cases, method {@link #purge} may be used to
-     * remove those Futures that have been cancelled.
      *
      * @param command the task to remove
      * @return {@code true} if the task was removed
@@ -102,7 +100,9 @@ public interface IExecutor {
     boolean remove(Runnable command);
 
     /**
-     * @return
+     * @return Whether this executor has already in the situation of shutdown.
+     * @see ThreadExecutor.Exposed#shutdown()
+     * @see ThreadExecutor.Exposed#shutdownNow()
      */
     boolean isShutdown();
 }

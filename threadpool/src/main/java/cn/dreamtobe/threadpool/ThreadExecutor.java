@@ -25,6 +25,9 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.RunnableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 
+/**
+ * The implementation of the executor.
+ */
 public class ThreadExecutor implements IExecutor {
     private final IRealExecutor mExecutor;
 
@@ -86,6 +89,9 @@ public class ThreadExecutor implements IExecutor {
         return mExecutor.shutdownNow();
     }
 
+    /**
+     * The exposition of package visible methods for {@link ThreadExecutor}.
+     */
     public static class Exposed {
         private final ThreadExecutor mThreadExecutor;
 

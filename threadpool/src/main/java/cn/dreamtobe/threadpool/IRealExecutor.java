@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 
 /**
- * Created by Jacksgong on 29/08/2016.
+ * The real executor.
  */
 
 public interface IRealExecutor extends ExecutorService {

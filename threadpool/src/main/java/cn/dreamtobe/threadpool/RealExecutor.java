@@ -22,6 +22,9 @@ import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The implementation of the real executor.
+ */
 public class RealExecutor extends ThreadPoolExecutor implements IRealExecutor {
 
     private final HashMap<Runnable, String> mCommandNameMap = new HashMap<>();
