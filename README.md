@@ -19,13 +19,13 @@ With this ThreadDebugger, you don't need to worry about how long duration you re
  IThreadDebugger debugger = ThreadDebugger.install(
          ThreadDebuggers.createWithCommonThreadKey() /** The ThreadDebugger with known thread Categories **/
                  // add Thread Category
-                 .add("ThreadPoolCentral-IO", "IO")
-                 .add("ThreadPoolCentral-computation", "computation")
-                 .add("ThreadPoolCentral-network", "network")
-                 .add("ThreadPoolCentral-test1", "test1")
-                 .add("ThreadPoolCentral-test2", "test2")
-                 .add("ThreadPoolCentral-test3", "test3")
-                 .add("ThreadPoolCentral-test4", "test4"),
+                 .add("IO", "IO")
+                 .add("computation", "computation")
+                 .add("network", "network")
+                 .add("test1", "test1")
+                 .add("test2", "test2")
+                 .add("test3", "test3")
+                 .add("test4", "test4"),
 
          2000, /** The frequent of Updating Thread Activity information **/
 
