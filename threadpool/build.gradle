@@ -1,17 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION as String
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion 7
+        targetSdkVersion COMPILE_SDK_VERSION as int
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME as String
     }
     buildTypes {
         release {
@@ -19,4 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+}
+
+if (isForUpload2Maven()) {
+    apply from: 'https://raw.githubusercontent.com/Jacksgong/JCenter/master/installv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/Jacksgong/JCenter/master/bintray_suffix1.gradle'
+    apply from: 'https://raw.githubusercontent.com/Jacksgong/JCenter/master/license.gradle'
 }

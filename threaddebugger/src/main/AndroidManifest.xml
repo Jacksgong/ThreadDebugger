@@ -1,4 +1,1 @@
-<manifest
-    package="cn.dreamtobe.threaddebugger">
-
-</manifest>
+<manifest package="cn.dreamtobe.threaddebugger"/>
