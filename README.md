@@ -1,5 +1,9 @@
 # ThreadDebugger
 
+![][thread_debugger_svg]
+![][thread_pools_svg]
+[![Build Status][build_status_svg]][build_status_link]
+
 ---
 
 There are several ways to debugger the activity of threads in the application, such as the Allocation Tracking from Android Studio Monitor by the way there are information about the running threads, or recording the Method Profiling from the Android Device Monitor by the way it also present the running threads information, but they are a little too heavy, and not flexible enough sometimes.
@@ -121,3 +125,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+[thread_pools_svg]: https://img.shields.io/badge/Thread-Pools-green.svg
+[thread_debugger_svg]: https://img.shields.io/badge/Thread-Debugger-orange.svg
+[build_status_svg]: https://travis-ci.org/Jacksgong/ThreadDebugger.svg?branch=master
+[build_status_link]: https://travis-ci.org/Jacksgong/ThreadDebugger
