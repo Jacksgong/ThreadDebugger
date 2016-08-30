@@ -27,9 +27,10 @@ import cn.dreamtobe.threaddebugger.ThreadDebuggers;
  * Created by Jacksgong on 27/08/2016.
  */
 
+@SuppressWarnings("DefaultFileTemplate")
 public class DemoApplication extends Application {
 
-    private static String TAG = "DemoApplication";
+    private static final String TAG = "DemoApplication";
 
     @Override
     public void onCreate() {

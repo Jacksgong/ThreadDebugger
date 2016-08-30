@@ -2,4 +2,13 @@
     <string name="app_name">ThreadDebugger</string>
     <string name="start_random_thread_loop">Start random thread loop</string>
     <string name="stop_random_thread_loop">Stop random thread loop</string>
+    <string name="debugger_ways_title">Debugger threads with command:</string>
+    <string name="debugger_ways_content">adb logcat | grep drawUpEachThreadDiffSize\nadb logcat | grep drawUpEachThreadDiffInfo\nadb logcat | grep drawUpEachThreadDiffInfo\nadb logcat | grep drawUpEachThreadInfo\nadb logcat | grep drawUpUnknowInfo</string>
+    <string name="add_task_to_the_io_thread_pool">Add task to the io-thread-pool</string>
+    <string name="add_task_to_the_computation_thread_pool">Add task to the computation-thread-pool</string>
+    <string name="add_task_to_the_network_thread_pool">Add task to the network-thread-pool</string>
+    <string name="add_task_to_the_test1_thread_pool">Add task to the test1-thread-pool</string>
+    <string name="add_task_to_the_test2_thread_pool">Add task to the test2-thread-pool</string>
+    <string name="add_task_to_the_test3_thread_pool">Add task to the test3-thread-pool</string>
+    <string name="add_task_to_the_test4_thread_pool">Add task to the test4-thread-pool</string>
 </resources>

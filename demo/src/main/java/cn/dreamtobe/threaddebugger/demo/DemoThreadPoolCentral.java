@@ -25,9 +25,10 @@ import cn.dreamtobe.threadpool.ThreadPools;
  * Created by Jacksgong on 27/08/2016.
  */
 
+@SuppressWarnings("DefaultFileTemplate")
 public class DemoThreadPoolCentral {
 
-    private static int CPU_PROCESSORS = Runtime.getRuntime().availableProcessors();
+    private static final int CPU_PROCESSORS = Runtime.getRuntime().availableProcessors();
 
     private static final IExecutor IO = ThreadPools.newExceedWaitPool(2, /** core **/
             3, 5, TimeUnit.SECONDS, /** max, idle-time **/

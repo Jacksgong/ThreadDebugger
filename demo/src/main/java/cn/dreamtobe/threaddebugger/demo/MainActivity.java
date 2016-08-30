@@ -31,6 +31,7 @@ import cn.dreamtobe.threadpool.IExecutor;
  * Created by Jacksgong on 27/08/2016.
  */
 
+@SuppressWarnings("DefaultFileTemplate")
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 mRandomThreadWorkBtn.setText(R.string.stop_random_thread_loop);
 
                 DemoThreadPoolCentral.test1().execute(mRandomThreadWorkName, new Runnable() {
-                    private Random mRandomTool = new Random();
+                    private final Random mRandomTool = new Random();
 
                     @Override
                     public void run() {
@@ -188,8 +189,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private Random mRandom = new Random();
-    private AtomicInteger mCommandNumber = new AtomicInteger(1);
+    private final Random mRandom = new Random();
+    private final AtomicInteger mCommandNumber = new AtomicInteger(1);
 
     private void addTaskToExecutor(IExecutor executor) {
         final int randomWaitSec = mRandom.nextInt(10) + 1;

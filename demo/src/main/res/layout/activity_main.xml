@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -17,14 +17,14 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:text="Debugger threads with command:"
+            android:text="@string/debugger_ways_title"
             android:textSize="14sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:text="adb logcat | grep drawUpEachThreadDiffSize\nadb logcat | grep drawUpEachThreadDiffInfo\nadb logcat | grep drawUpEachThreadDiffInfo\nadb logcat | grep drawUpEachThreadInfo\nadb logcat | grep drawUpUnknowInfo"
+            android:text="@string/debugger_ways_content"
             android:textSize="12sp"/>
 
         <android.support.v7.widget.AppCompatButton
@@ -37,42 +37,42 @@
             android:id="@+id/add_task_to_io_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add task to the io-thread-pool"/>
+            android:text="@string/add_task_to_the_io_thread_pool"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/add_task_to_computation_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add task to the computation-thread-pool"/>
+            android:text="@string/add_task_to_the_computation_thread_pool"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/add_task_to_network_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add task to the network-thread-pool"/>
+            android:text="@string/add_task_to_the_network_thread_pool"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/add_task_to_test1_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add task to the test1-thread-pool"/>
+            android:text="@string/add_task_to_the_test1_thread_pool"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/add_task_to_test2_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add task to the test2-thread-pool"/>
+            android:text="@string/add_task_to_the_test2_thread_pool"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/add_task_to_test3_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add task to the test3-thread-pool"/>
+            android:text="@string/add_task_to_the_test3_thread_pool"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/add_task_to_test4_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add task to the test4-thread-pool"/>
+            android:text="@string/add_task_to_the_test4_thread_pool"/>
     </LinearLayout>
 </ScrollView>
