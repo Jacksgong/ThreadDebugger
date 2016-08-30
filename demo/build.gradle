@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION as String
+
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        targetSdkVersion COMPILE_SDK_VERSION as int
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME as String
     }
     buildTypes {
         release {
