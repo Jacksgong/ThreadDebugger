@@ -4,9 +4,9 @@
 
 There are several ways to debugger the activity of threads in the application, such as the Allocation Tracking from Android Studio Monitor by the way there are information about the running threads, or recording the Method Profiling from the Android Device Monitor by the way it also present the running threads information, but they are a little too heavy, and not flexible enough sometimes.
 
- With this ThreadDebugger, you don't need to worry about how long duration you recording, and you can find out the changing of the threads activity very easy.
+With this ThreadDebugger, you don't need to worry about how long duration you recording, and you can find out the changing of the threads activity very easy.
 
- ---
+---
 
 ## Install
 
@@ -83,6 +83,24 @@ There are several ways to debugger the activity of threads in the application, s
 | drawUpUnknownInfo() | the content of unknown threads info.
 | isSizeChanged() | Whether threads size has changed.
 | isChanged() | Whether threads has changed.
+
+## Method in ThreadPools
+
+> The executor from this thread pool factory will require each task in it to provide its exact name to facilitate debugging.
+
+> - Entrance: [ThreadPools](https://github.com/Jacksgong/ThreadDebugger/blob/master/threadpool/src/main/java/cn/dreamtobe/threadpool/ThreadPools.java)
+> - Demo: [DemoThreadPoolCentral](https://github.com/Jacksgong/ThreadDebugger/blob/master/demo/src/main/java/cn/dreamtobe/threaddebugger/demo/DemoThreadPoolCentral.java)
+
+| Method | Function
+| --- | ---
+| newExceedWaitPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be enqueued to the waiting queue, and will be executed when the size of active command less than the {@code maximumPoolSize}.
+| newExceedDiscardPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be discard.
+| newExceedCallerRunsPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be executed immediately in the caller thread.
+| newExceedCallImmediatelyPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be executed immediately in the global temporary unbound thread pool.
+| newSinglePool | The same to the {@link Executors#newSingleThreadExecutor()}.
+| newFixedPool | The same to the {@link Executors#newFixedThreadPool(int)}.
+| newCachedPool | The same to the {@link Executors#newCachedThreadPool()}.
+
 
 ## Demo Project
 
