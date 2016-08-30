@@ -202,7 +202,7 @@ class DefaultThreadDebugger implements IThreadDebugger {
             return noData();
         }
 
-        final StringBuilder builder = createBasicInfoStringBuilder("drawUpUnknownInfo");
+        final StringBuilder builder = createBasicInfoStringBuilderUnChecked("drawUpUnknownInfo");
 
         builder.append(" Unknow thread count = ")
                 .append(mCurUnknowCategory.size()).append(". ");
@@ -343,6 +343,10 @@ class DefaultThreadDebugger implements IThreadDebugger {
             return null;
         }
 
+        return createBasicInfoStringBuilderUnChecked(methodName);
+    }
+
+    private StringBuilder createBasicInfoStringBuilderUnChecked(String methodName) {
         StringBuilder builder = new StringBuilder();
         builder.append("->")
                 .append(methodName)
@@ -358,6 +362,7 @@ class DefaultThreadDebugger implements IThreadDebugger {
                 .append(". ");
     }
 
+    @SuppressWarnings("SameReturnValue")
     private String noData() {
         return "No data";
     }

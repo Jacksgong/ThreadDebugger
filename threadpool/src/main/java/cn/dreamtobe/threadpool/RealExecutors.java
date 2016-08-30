@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 class RealExecutors {
-    public static IExecutor TEMPORARY_CACHED_THREAD_POOL = ThreadPools.
+    public static final IExecutor TEMPORARY_CACHED_THREAD_POOL = ThreadPools.
             newCachedPool(5L, TimeUnit.SECONDS, "GlobalCachedThreadPool");
 
     static class ExceedWait extends RealExecutor {
@@ -81,7 +81,7 @@ class RealExecutors {
     private static class ExceedWaitQueue extends SynchronousQueue<Runnable> {
 
         private final String TAG = "ExceedWaitQueue";
-        private LinkedBlockingQueue<Runnable> mExceedQueue = new LinkedBlockingQueue<>();
+        private final LinkedBlockingQueue<Runnable> mExceedQueue = new LinkedBlockingQueue<>();
 
         ExceedWaitQueue() {
             super(true);

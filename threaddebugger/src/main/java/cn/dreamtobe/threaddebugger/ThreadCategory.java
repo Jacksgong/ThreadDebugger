@@ -24,16 +24,13 @@ import java.util.List;
  * The thread category.
  */
 
-public class ThreadCategory {
+public class ThreadCategory implements Cloneable {
     private String mStartWidthKey;
     private String mAlias;
     private List<ThreadInfo> mInfoList;
 
     boolean is(String threadName) {
-        if (threadName == null) {
-            return false;
-        }
-        return threadName.toLowerCase().startsWith(mStartWidthKey);
+        return threadName != null && threadName.toLowerCase().startsWith(mStartWidthKey);
     }
 
     int size() {
@@ -100,11 +97,7 @@ public class ThreadCategory {
         }
 
         final int diffSize = size() - category.size();
-        if (diffSize != 0) {
-            return true;
-        }
-
-        return diff(category).size() > 0;
+        return diffSize != 0 || diff(category).size() > 0;
 
     }
 
@@ -152,11 +145,18 @@ public class ThreadCategory {
         }
     }
 
+    @SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
     @Override
     protected ThreadCategory clone() {
-        ThreadCategory clone = new ThreadCategory();
-        clone.mStartWidthKey = this.mStartWidthKey;
-        clone.mAlias = this.mAlias;
+        ThreadCategory clone;
+        try {
+            clone = (ThreadCategory) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            clone = new ThreadCategory();
+        }
+
+        //noinspection unchecked
         clone.mInfoList = mInfoList == null ? null :
                 (List<ThreadInfo>) ((ArrayList) mInfoList).clone();
 
@@ -164,8 +164,8 @@ public class ThreadCategory {
     }
 
     private static class ThreadInfo {
-        private int hashCode;
-        private String threadName;
+        private final int hashCode;
+        private final String threadName;
 
         ThreadInfo(int hashCode, String threadName) {
             this.hashCode = hashCode;

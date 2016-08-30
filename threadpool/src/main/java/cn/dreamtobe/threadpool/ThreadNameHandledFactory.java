@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * The factory with handling the thread name.
  */
-public class ThreadNameHandledFactory implements ThreadFactory {
+class ThreadNameHandledFactory implements ThreadFactory {
 
     private final AtomicInteger mThreadNumber = new AtomicInteger(1);
     private final String mPrefixName;

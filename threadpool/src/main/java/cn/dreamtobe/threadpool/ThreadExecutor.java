@@ -31,7 +31,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ThreadExecutor implements IExecutor {
     private final IRealExecutor mExecutor;
 
-    ExecutorService getExecutor() {
+    private ExecutorService getExecutor() {
         return mExecutor;
     }
 
@@ -81,11 +81,11 @@ public class ThreadExecutor implements IExecutor {
         return mExecutor.isShutdown();
     }
 
-    void shutdown() {
+    private void shutdown() {
         mExecutor.shutdown();
     }
 
-    List<Runnable> shutdownNow() {
+    private List<Runnable> shutdownNow() {
         return mExecutor.shutdownNow();
     }
 
