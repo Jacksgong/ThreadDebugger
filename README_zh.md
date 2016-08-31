@@ -175,11 +175,11 @@ drawUpUnknownInfo: Unknow thread count = 4. Unknow thread differ = 0. unknown[hw
 > - 入口: [ThreadPools](https://github.com/Jacksgong/ThreadDebugger/blob/master/threadpool/src/main/java/cn/dreamtobe/threadpool/ThreadPools.java)
 > - 案例: [DemoThreadPoolCentral](https://github.com/Jacksgong/ThreadDebugger/blob/master/demo/src/main/java/cn/dreamtobe/threaddebugger/demo/DemoThreadPoolCentral.java)
 
-#### 通用规则
+#### 1. 通用规则
 
 始终保活corePoolSize的线程，当任务数大于corePoolSize时小于maximumPoolSize时，会继续创建线程进行执行；当大于corePoolSize小于maximumPoolSize的线程闲置超过keepAliveTime时间时，这部分线程会被回收。
 
-#### 方法说明
+#### 2. 方法说明
 
 | 方法 | 功能
 | --- | ---
@@ -214,7 +214,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-[demo_screenshot_png]: https://raw.githubusercontent.com/Jacksgong/ThreadDebugger/master/art/demo_screenshot.png
+[demo_screenshot_png]: https://raw.githubusercontent.com/Jacksgong/ThreadDebugger/master/art/demo_screenshot_zh.png
 [thread_pools_svg]: https://img.shields.io/badge/Thread-Pools-green.svg
 [thread_pools_link]: https://github.com/Jacksgong/ThreadDebugger/blob/master/threadpool/src/main/java/cn/dreamtobe/threadpool/ThreadPools.java
 [thread_debugger_svg]: https://img.shields.io/badge/Thread-Debugger-orange.svg
