@@ -16,8 +16,6 @@
 
 package cn.dreamtobe.threadpool;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,10 +31,11 @@ import java.util.concurrent.TimeUnit;
  */
 
 class RealExecutors {
-    public static final IExecutor TEMPORARY_CACHED_THREAD_POOL = ThreadPools.
+    private static final IExecutor TEMPORARY_CACHED_THREAD_POOL = ThreadPools.
             newCachedPool(5L, TimeUnit.SECONDS, "GlobalCachedThreadPool");
 
     static class ExceedWait extends RealExecutor {
+        private final static String TAG = "ExceedWait";
 
         public ExceedWait(int corePoolSize,
                           int maximumPoolSize, long keepAliveTime, TimeUnit unit, String prefixName) {
@@ -47,7 +46,8 @@ class RealExecutors {
                         @Override
                         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
                             if (!executor.isShutdown()) {
-                                Log.d("ExceedWait", "execute directly. by rejected: " + r);
+                                ThreadPoolLog.d(TAG, "put the rejected command to the exceed queue" +
+                                        " in the rejectedExecution method: %s", r);
                                 ((ExceedWaitQueue) executor.getQueue()).putExceed(r);
                             }
                         }
@@ -59,7 +59,8 @@ class RealExecutors {
             final ExceedWaitQueue queue = (ExceedWaitQueue) getQueue();
             if (!isShutdown() && queue.exceedSize() > 0) {
                 queue.putExceed(command);
-                Log.d("ExceedWait", "execute directly. by execute: " + command);
+                ThreadPoolLog.d(TAG, "put the rejected command to the exceed queue in " +
+                        "the execute method: %s", command);
                 return;
             }
             super.execute(command);
@@ -80,7 +81,7 @@ class RealExecutors {
 
     private static class ExceedWaitQueue extends SynchronousQueue<Runnable> {
 
-        private final String TAG = "ExceedWaitQueue";
+        private final static String TAG = "ExceedWaitQueue";
         private final LinkedBlockingQueue<Runnable> mExceedQueue = new LinkedBlockingQueue<>();
 
         ExceedWaitQueue() {
@@ -89,43 +90,43 @@ class RealExecutors {
 
         @Override
         public boolean offer(Runnable runnable) {
-            Log.d(TAG, "offer() called with: runnable = [" + runnable + "]");
+            ThreadPoolLog.d(TAG, "offer() called with: runnable = [%s]", runnable);
             boolean result = super.offer(runnable);
-            Log.d(TAG, "offer() returned: " + result);
+            ThreadPoolLog.d(TAG, "offer() returned: %B", result);
             return result;
         }
 
         @Override
         public Runnable poll(long timeout, TimeUnit unit) throws InterruptedException {
-            Log.d(TAG, "poll() called with: timeout = [" + timeout + "], unit = [" + unit + "]");
+            ThreadPoolLog.d(TAG, "poll() called with: timeout = [%d], unit = [%s]", timeout, unit);
             Runnable result = super.poll(timeout, unit);
             if (mExceedQueue.size() > 0 && result == null) {
                 result = mExceedQueue.poll(timeout, unit);
             }
-            Log.d(TAG, "poll() returned: " + result);
+            ThreadPoolLog.d(TAG, "poll() returned: %s", result);
             return result;
         }
 
         @Override
         public Runnable take() throws InterruptedException {
-            Log.d(TAG, "take() called");
+            ThreadPoolLog.d(TAG, "take() called");
             Runnable result = super.take();
             if (mExceedQueue.size() > 0 && result == null) {
                 result = mExceedQueue.take();
             }
-            Log.d(TAG, "take() returned: " + result);
+            ThreadPoolLog.d(TAG, "take() returned: %s", result);
             return result;
         }
 
         @Override
         public boolean remove(Object o) {
-            Log.d(TAG, "remove() called with: o = [" + o + "]");
+            ThreadPoolLog.d(TAG, "remove() called with: o = [%s]", o);
             return mExceedQueue.remove(o);
         }
 
         @Override
         public boolean removeAll(Collection<?> c) {
-            Log.d(TAG, "removeAll() called with: c = [" + c + "]");
+            ThreadPoolLog.d(TAG, "removeAll() called with: c = [%s]", c);
             return mExceedQueue.removeAll(c);
         }
 
