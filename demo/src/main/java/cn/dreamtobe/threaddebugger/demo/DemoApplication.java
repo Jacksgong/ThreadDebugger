@@ -22,6 +22,7 @@ import android.util.Log;
 import cn.dreamtobe.threaddebugger.IThreadDebugger;
 import cn.dreamtobe.threaddebugger.ThreadDebugger;
 import cn.dreamtobe.threaddebugger.ThreadDebuggers;
+import cn.dreamtobe.threadpool.ThreadPoolLog;
 
 /**
  * Created by Jacksgong on 27/08/2016.
@@ -35,6 +36,9 @@ public class DemoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // Just for debug.
+        ThreadPoolLog.NEED_LOG = true;
+
         //noinspection UnusedAssignment
         IThreadDebugger debugger = ThreadDebugger.install(
                 ThreadDebuggers.createWithCommonThreadKey()
