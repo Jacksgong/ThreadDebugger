@@ -52,12 +52,12 @@ public interface IThreadDebugger {
     /**
      * @return the content of the changed size of each changed thread.
      */
-    String drawUpEachThreadDiffSize();
+    String drawUpEachThreadSizeDiff();
 
     /**
      * @return the content of the information of the each changed thread.
      */
-    String drawUpEachThreadDiffInfo();
+    String drawUpEachThreadInfoDiff();
 
     /**
      * @return the content of unknown threads info.

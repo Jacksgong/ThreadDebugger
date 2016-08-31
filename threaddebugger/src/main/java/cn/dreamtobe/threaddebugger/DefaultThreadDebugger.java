@@ -186,13 +186,13 @@ class DefaultThreadDebugger implements IThreadDebugger {
     }
 
     @Override
-    public String drawUpEachThreadDiffSize() {
+    public String drawUpEachThreadSizeDiff() {
         return drawUpEachThreadDiff(false);
 
     }
 
     @Override
-    public String drawUpEachThreadDiffInfo() {
+    public String drawUpEachThreadInfoDiff() {
         return drawUpEachThreadDiff(true);
     }
 
@@ -204,11 +204,11 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
         final StringBuilder builder = createBasicInfoStringBuilderUnChecked("drawUpUnknownInfo");
 
-        builder.append(" Unknow thread count = ")
+        builder.append("Unknow thread count = ")
                 .append(mCurUnknowCategory.size()).append(". ");
         final int diff = mPreUnknowCategory == null ?
                 mCurUnknowCategory.size() : mCurUnknowCategory.size() - mPreUnknowCategory.size();
-        builder.append(" Unknow thread differ = ");
+        builder.append("Unknow thread differ = ");
         if (diff > 0) {
             builder.append("+");
         }
@@ -256,14 +256,18 @@ class DefaultThreadDebugger implements IThreadDebugger {
     }
 
     private String drawUpEachThreadDiff(boolean showDetail) {
-        final StringBuilder builder = createBasicInfoStringBuilder("drawUpEachThreadDiff" +
-                (showDetail ? "Info" : "Size"));
+        final StringBuilder builder = createBasicInfoStringBuilder("drawUpEachThread" +
+                (showDetail ? "Info" : "Size") + "Diff");
 
         if (builder == null) {
             return noData();
         }
 
         appendSize(builder);
+
+        if (!showDetail && mPreviousSize == mSize) {
+            return builder.append("Thread size has not changed.").toString();
+        }
 
         final List<ThreadCategory> preThreadCategoryList = mPreThreadCategoryList == null ?
                 null : (List<ThreadCategory>) ((ArrayList) mPreThreadCategoryList).clone();
@@ -348,9 +352,8 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
     private StringBuilder createBasicInfoStringBuilderUnChecked(String methodName) {
         StringBuilder builder = new StringBuilder();
-        builder.append("->")
-                .append(methodName)
-                .append("<-");
+        builder.append(methodName)
+                .append(": ");
 
         return builder;
     }

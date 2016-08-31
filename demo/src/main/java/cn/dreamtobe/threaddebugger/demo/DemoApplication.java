@@ -52,8 +52,8 @@ public class DemoApplication extends Application {
                     @Override
                     public void onChanged(IThreadDebugger debugger) {
                         // callback this method when the threads in this application has changed.
-                        Log.d(TAG, debugger.drawUpEachThreadDiffInfo());
-                        Log.d(TAG, debugger.drawUpEachThreadDiffSize());
+                        Log.d(TAG, debugger.drawUpEachThreadInfoDiff());
+                        Log.d(TAG, debugger.drawUpEachThreadSizeDiff());
                         Log.d(TAG, debugger.drawUpEachThreadInfo());
                         Log.d(TAG, debugger.drawUpEachThreadSize());
                         Log.d(TAG, debugger.drawUpUnknownInfo());
