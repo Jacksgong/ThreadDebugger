@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="start_random_thread_loop">开始随机添加任务</string>
+    <string name="debugger_ways_title">通过Logcat查看调试信息:</string>
+    <string name="add_task_to_the_io_thread_pool">添加任务到IO线程池</string>
+    <string name="add_task_to_the_computation_thread_pool">添加任务到computation线程池</string>
+    <string name="add_task_to_the_test1_thread_pool">添加任务到TEST1线程池</string>
+    <string name="add_task_to_the_test2_thread_pool">添加任务到TEST2线程池</string>
+    <string name="add_task_to_the_test3_thread_pool">添加任务到TEST3线程池</string>
+    <string name="add_task_to_the_test4_thread_pool">添加任务到TEST4线程池</string>
+    <string name="add_task_to_the_network_thread_pool">添加任务到Network线程池</string>
+    <string name="stop_random_thread_loop">停止随机添加任务</string>
+</resources>
