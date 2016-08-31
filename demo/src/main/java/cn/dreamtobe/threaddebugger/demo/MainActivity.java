@@ -16,10 +16,14 @@
 
 package cn.dreamtobe.threaddebugger.demo;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.Random;
@@ -245,5 +249,29 @@ public class MainActivity extends AppCompatActivity {
         mAddTaskToTest3Btn = (AppCompatButton) findViewById(R.id.add_task_to_test3_btn);
         mAddTaskToTest4Btn = (AppCompatButton) findViewById(R.id.add_task_to_test4_btn);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_github:
+                openGitHub();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void openGitHub() {
+        Uri uri = Uri.parse(getString(R.string.app_github_url));
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
 
 }

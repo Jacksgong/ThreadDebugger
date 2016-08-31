@@ -35,6 +35,7 @@ public class DemoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //noinspection UnusedAssignment
         IThreadDebugger debugger = ThreadDebugger.install(
                 ThreadDebuggers.createWithCommonThreadKey()
                         .add("IO", "IO") /** add Thread Category **/

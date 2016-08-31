@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">ThreadDebugger</string>
     <string name="start_random_thread_loop">Start random thread loop</string>
     <string name="stop_random_thread_loop">Stop random thread loop</string>
     <string name="debugger_ways_title">Debugger threads with command:</string>
