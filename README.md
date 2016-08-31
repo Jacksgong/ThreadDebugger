@@ -199,7 +199,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-[demo_screenshot_png]: https://raw.githubusercontent.com/Jacksgong/ThreadDebugger/master/art/demo_snapshot.png
+[demo_screenshot_png]: https://raw.githubusercontent.com/Jacksgong/ThreadDebugger/master/art/demo_screenshot.png
 [thread_pools_svg]: https://img.shields.io/badge/Thread-Pools-green.svg
 [thread_pools_link]: https://github.com/Jacksgong/ThreadDebugger/blob/master/threadpool/src/main/java/cn/dreamtobe/threadpool/ThreadPools.java
 [thread_debugger_svg]: https://img.shields.io/badge/Thread-Debugger-orange.svg
