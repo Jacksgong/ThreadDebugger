@@ -3,4 +3,5 @@
     <string name="app_name">ThreadDebugger</string>
     <string name="app_github">GITHUB</string>
     <string name="app_github_url">https://github.com/Jacksgong/ThreadDebugger</string>
+    <string name="debugger_ways_content">adb logcat | grep drawUpEachThreadDiffSize\nadb logcat | grep drawUpEachThreadDiffInfo\nadb logcat | grep drawUpEachThreadSize\nadb logcat | grep drawUpEachThreadInfo\nadb logcat | grep drawUpUnknowInfo</string>
 </resources>

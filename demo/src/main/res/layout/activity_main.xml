@@ -12,25 +12,29 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/Base.TextAppearance.AppCompat.Widget.PopupMenu.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/debugger_ways_title"/>
+
+        <TextView
+            style="@style/Base.TextAppearance.AppCompat.Small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/debugger_ways_title"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:text="@string/debugger_ways_content"
-            android:textSize="12sp"/>
+            android:layout_marginTop="5dp"
+            android:background="#FFF6F6F6"
+            android:padding="5dp"
+            android:text="@string/debugger_ways_content"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/random_thread_work_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:text="@string/start_random_thread_loop"/>
 
         <android.support.v7.widget.AppCompatButton
