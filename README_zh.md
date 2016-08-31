@@ -8,18 +8,26 @@
 
 ---
 
-There are several ways to debugger the activity of threads in the application, such as the Allocation Tracking from Android Studio Monitor by the way there are information about the running threads, or recording the Method Profiling from the Android Device Monitor by the way it also present the running threads information, but they are a little too heavy, and not flexible enough sometimes.
+这个库包含: 线程调试器(threaddebugger)、线程池创建工具(threadpools)。
 
-With this ThreadDebugger, you don't need to worry about how long duration you recording, and you can find out the changing of the threads activity very easy.
+#### 线程调试器
+
+虽然我们知道已经有很多方法进行线程调试，如通过Android Studio Monitor 进行Allocation Tracking，在分析结果中会带有期间线程的一些信息；或者是通过Android Device Monitor进行Method Profiling，在分析结果中也会带有期间线程的一些信息。但是每次都需要进行启动关闭，并且每次结果分析都要几秒，几十秒甚至更久，显得不是很灵活。
+
+ThreadDebugger是一个简单易用的线程调试器，可以帮助您随时查看应用中所有线程的使用情况，以及变化情况。
+
+#### 线程池创建工具
+
+该线程池创建工具，相比系统的Executors强制要求每次执行任务的时候都需要指定任务的名称，以便于更好的调试与监控，并且提供非常便捷的创建相关规则的线程池。
 
 ---
 
-## I. Install
+## I. 安装
 
 ```
 ```
 
-## II. Start monitor
+## II. 启动监控
 
  ```java
  IThreadDebugger debugger = ThreadDebugger.install(
@@ -48,7 +56,7 @@ With this ThreadDebugger, you don't need to worry about how long duration you re
          });
  ```
 
-## III. Output Logcat
+## III. Logcat的输出
 
 #### 1. drawUpEachThreadInfoDiff
 
@@ -145,40 +153,46 @@ drawUpUnknownInfo: Unknow thread count = 4. Unknow thread differ = 0. unknown[hw
 drawUpUnknownInfo: Unknow thread count = 4. Unknow thread differ = 0. unknown[hwuiTask2, hwuiTask1, ThreadDebugger, Signal Catcher]
 ```
 
-## IV. Method in IThreadDebugger
+## IV. IThreadDebugger中的方法
 
-| Method | Function
+| 方法 | 功能
 | --- | ---
-| add(key:String) | add the thread category with the key used to compare the start of thread-name and also as its alias to the Debugger.
-| add(startWithKey:String , alias:String) | add the thread category with the startWithKey and its alias to the Debugger.
-| refresh() | Refresh threads situation.
-| drawUpEachThreadSize() | the content of the size of each thread.
-| drawUpEachThreadInfo() | the content of the information of each thread.
-| drawUpEachThreadSizeDiff() | the content of the changed size of each changed thread.
-| drawUpEachThreadInfoDiff() | the content of the information of the each changed thread.
-| drawUpUnknownInfo() | the content of unknown threads info.
-| isSizeChanged() | Whether threads size has changed.
-| isChanged() | Whether threads has changed.
+| add(key:String) | 为当前调试器添加一个名称前缀为key，并且别名为key的线程类别
+| add(startWithKey:String , alias:String) | 为当前调试器添加一个名称前缀为startWithKey，并且别名为alias的线程类别
+| refresh() | 刷新线程情况
+| drawUpEachThreadSize() | 返回当前所有类别线程的个数
+| drawUpEachThreadInfo() | 返回当前所有类别中线程的详情
+| drawUpEachThreadSizeDiff() | 返回对比上次刷新，线程个数的变化
+| drawUpEachThreadInfoDiff() | 返回对比上次刷新，线程变化的详情
+| drawUpUnknownInfo() | 返回当前所有未分类的线程类别中线程的详情
+| isSizeChanged() | 对比上次刷新，线程个数是否有变化
+| isChanged() | 对比上次刷新，线程是否有变化
 
-## V. Method in ThreadPools
+## V. ThreadPools
 
-> The executor from this thread pool factory will require each task in it to provide its exact name to facilitate debugging.
+> 该线程池创建工具，相比系统的Executors强制要求每次执行任务的时候都需要指定任务的名称，以便于更好的调试与监控，并且提供非常便捷的创建相关规则的线程池。
 
-> - Entrance: [ThreadPools](https://github.com/Jacksgong/ThreadDebugger/blob/master/threadpool/src/main/java/cn/dreamtobe/threadpool/ThreadPools.java)
-> - Demo: [DemoThreadPoolCentral](https://github.com/Jacksgong/ThreadDebugger/blob/master/demo/src/main/java/cn/dreamtobe/threaddebugger/demo/DemoThreadPoolCentral.java)
+> - 入口: [ThreadPools](https://github.com/Jacksgong/ThreadDebugger/blob/master/threadpool/src/main/java/cn/dreamtobe/threadpool/ThreadPools.java)
+> - 案例: [DemoThreadPoolCentral](https://github.com/Jacksgong/ThreadDebugger/blob/master/demo/src/main/java/cn/dreamtobe/threaddebugger/demo/DemoThreadPoolCentral.java)
 
-| Method | Function
+#### 通用规则
+
+始终保活corePoolSize的线程，当任务数大于corePoolSize时小于maximumPoolSize时，会继续创建线程进行执行；当大于corePoolSize小于maximumPoolSize的线程闲置超过keepAliveTime时间时，这部分线程会被回收。
+
+#### 方法说明
+
+| 方法 | 功能
 | --- | ---
-| newExceedWaitPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be enqueued to the waiting queue, and will be executed when the size of active command less than the {@code maximumPoolSize}.
-| newExceedDiscardPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be discard.
-| newExceedCallerRunsPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be executed immediately in the caller thread.
-| newExceedCallImmediatelyPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be executed immediately in the global temporary unbound thread pool.
-| newSinglePool | The same to the `Executors#newSingleThreadExecutor()`.
-| newFixedPool | The same to the `Executors#newFixedThreadPool(int)`.
-| newCachedPool | The same to the `Executors#newCachedThreadPool()`.
+| newExceedWaitPool | 在满足通用规则的前提下，当任务数大于maximumPoolSize，溢出的任务会在溢出等待队列中等待，直到有任务执行完成，线程空闲出来再进行执行，溢出等待队列符合Fifo进出队列规则
+| newExceedDiscardPool | 在满足通用规则的前提下，当任务数大于maximumPoolSize，溢出的任务会直接被丢弃
+| newExceedCallerRunsPool | 在满足通用规则的前提下，当任务数大于maximumPoolSize，溢出的任务在调用线程执行方法(`execute`/`submit`)所在线程直接执行
+| newExceedCallImmediatelyPool | 在满足通用规则的前提下，当任务数大于maximumPoolSize，溢出的任务在全局缓存线程池中直接执行
+| newSinglePool | 规则与`Executors#newSingleThreadExecutor()`相同
+| newFixedPool | 规则与`Executors#newFixedThreadPool(int)`相同
+| newCachedPool | 规则与`Executors#newCachedThreadPool()`相同
 
 
-## VI. Demo Project
+## VI. Demo项目
 
 ![][demo_screenshot_png]
 
