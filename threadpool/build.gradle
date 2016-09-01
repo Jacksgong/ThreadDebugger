@@ -23,3 +23,8 @@ if (isForUpload2Maven()) {
     apply from: 'https://raw.githubusercontent.com/Jacksgong/JCenter/master/bintray_suffix1.gradle'
     apply from: 'https://raw.githubusercontent.com/Jacksgong/JCenter/master/license.gradle'
 }
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.squareup.assertj:assertj-android:1.1.1'
+}
