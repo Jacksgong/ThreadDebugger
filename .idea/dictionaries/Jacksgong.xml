@@ -7,6 +7,7 @@
       <w>jdwp</w>
       <w>mipush</w>
       <w>nadb</w>
+      <w>noop</w>
       <w>threaddebugger</w>
       <w>threadpool</w>
       <w>threadpools</w>

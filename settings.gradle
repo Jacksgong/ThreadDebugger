@@ -1,1 +1,1 @@
-include ':demo', ':threaddebugger', ':threadpool'
+include ':demo', ':threaddebugger', ':threadpool', ':threaddebugger-no-op'
