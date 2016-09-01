@@ -24,7 +24,15 @@ ThreadDebugger是一个简单易用的线程调试器，可以帮助您随时查
 
 ## I. 安装
 
+添加下面的依赖到`build.gradle`中:
+
 ```
+dependencies {
+    // If you need use ThreadDebugger
+    compile 'cn.dreamtobe.threaddebugger:threaddebugger:1.0.1'
+    // If you need use ThreadPool
+    compile 'cn.dreamtobe.threaddebugger:threadpool:1.0.1'
+}
 ```
 
 ## II. 启动监控
