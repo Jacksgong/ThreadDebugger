@@ -21,14 +21,22 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * The factory of the thread pool.
+ * <p>
+ * <em>Basic Rules</em>
+ * <p>
+ * When a new task is submitted in method execute(Runnable), and fewer than corePoolSize threads are
+ * running, a new thread is created to handle the request, even if other worker threads are idle. If
+ * there are more than corePoolSize but less than maximumPoolSize threads running, a new thread is
+ * created to handle the request too, but when it turn to idle and the interval time of waiting for
+ * new tasks more than keepAliveTime, it will be terminate to reduce the cost of resources.
  */
 
 public class ThreadPools {
 
     /**
-     * If the size of active command equal to the {@code maximumPoolSize}, the further command will
-     * be enqueued to the waiting queue, and will be executed when the size of active command less
-     * than the {@code maximumPoolSize}.
+     * Under the premise of satisfying the Basic Rules, if there are {@code maximumPoolSize} tasks
+     * running, the further task will be enqueued to the waiting queue, and will be executed when
+     * the size of running tasks less than {@code maximumPoolSize}.
      * <b/>
      * In this thread pool, it use the TransferQueue in {@link java.util.concurrent.SynchronousQueue}
      * to hold the normal command.
@@ -52,8 +60,8 @@ public class ThreadPools {
     }
 
     /**
-     * If the size of active command equal to the {@code maximumPoolSize}, the further command will
-     * be discard.
+     * Under the premise of satisfying the Basic Rules, if there are {@code maximumPoolSize} tasks
+     * running, the further task will be discard.
      *
      * @param corePoolSize    the number of threads to keep in the pool, even
      *                        if they are idle.
@@ -75,8 +83,8 @@ public class ThreadPools {
     }
 
     /**
-     * If the size of active command equal to the {@code maximumPoolSize}, the further command will
-     * be executed immediately in the caller thread.
+     * Under the premise of satisfying the Basic Rules, if there are {@code maximumPoolSize} tasks
+     * running, the further task will be executed immediately in the caller thread.
      *
      * @param corePoolSize    the number of threads to keep in the pool, even
      *                        if they are idle.
@@ -98,8 +106,9 @@ public class ThreadPools {
     }
 
     /**
-     * If the size of active command equal to the {@code maximumPoolSize}, the further command will
-     * be executed immediately in the global temporary unbound thread pool.
+     * Under the premise of satisfying the Basic Rules, if there are {@code maximumPoolSize} tasks
+     * running, the further task will be executed immediately in the global temporary unbound thread
+     * pool.
      *
      * @param corePoolSize    the number of threads to keep in the pool, even
      *                        if they are idle.
