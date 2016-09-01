@@ -35,6 +35,9 @@ dependencies {
 }
 ```
 
+- ThreadDebugger: [ ![Download](https://api.bintray.com/packages/jacksgong/maven/ThreadDebugger/images/download.svg) ](https://bintray.com/jacksgong/maven/ThreadDebugger/_latestVersion)
+- ThreadPool: [ ![Download](https://api.bintray.com/packages/jacksgong/maven/ThreadDebugger-threadpool/images/download.svg) ](https://bintray.com/jacksgong/maven/ThreadDebugger-threadpool/_latestVersion)
+
 ## II. 启动监控
 
  ```java
