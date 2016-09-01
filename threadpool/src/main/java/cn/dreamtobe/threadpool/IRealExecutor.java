@@ -27,4 +27,6 @@ interface IRealExecutor extends ExecutorService {
     HashMap<Runnable, String> getCommandNameMap();
 
     boolean remove(Runnable command);
+
+    String getPrefixName();
 }

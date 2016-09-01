@@ -69,4 +69,13 @@ public class RealExecutor extends ThreadPoolExecutor implements IRealExecutor {
     public HashMap<Runnable, String> getCommandNameMap() {
         return mCommandNameMap;
     }
+
+    @Override
+    public String getPrefixName() {
+        if (getThreadFactory() instanceof ThreadNameHandledFactory) {
+            return ((ThreadNameHandledFactory) getThreadFactory()).getPrefixName();
+        }
+
+        return null;
+    }
 }

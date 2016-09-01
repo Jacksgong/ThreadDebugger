@@ -105,4 +105,9 @@ public interface IExecutor {
      * @see ThreadExecutor.Exposed#shutdownNow()
      */
     boolean isShutdown();
+
+    /**
+     * @return The prefix name of this executor.
+     */
+    String getPrefixName();
 }

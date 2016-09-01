@@ -36,4 +36,8 @@ class ThreadNameHandledFactory implements ThreadFactory {
         return new Thread(r, mPrefixName + "-" +
                 mThreadNumber.getAndIncrement());
     }
+
+    public String getPrefixName() {
+        return mPrefixName;
+    }
 }

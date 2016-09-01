@@ -81,6 +81,11 @@ public class ThreadExecutor implements IExecutor {
         return mExecutor.isShutdown();
     }
 
+    @Override
+    public String getPrefixName() {
+        return mExecutor.getPrefixName();
+    }
+
     private void shutdown() {
         mExecutor.shutdown();
     }
