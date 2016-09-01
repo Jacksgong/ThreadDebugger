@@ -28,6 +28,8 @@ import android.util.Log;
 
 public class ThreadDebugger {
 
+    public static boolean NEED_PRINT_COST = false;
+
     /**
      * Install the thread debugger with the command thread keys.
      */
@@ -78,14 +80,22 @@ public class ThreadDebugger {
 
             @Override
             public boolean handleMessage(Message message) {
-                long start = SystemClock.uptimeMillis();
+                long start = 0;
+                if (NEED_PRINT_COST) {
+                    start = SystemClock.uptimeMillis();
+                }
+
                 debugger.refresh();
 
                 if (callback != null && debugger.isChanged()) {
                     callback.onChanged(debugger);
-
                 }
-                Log.d("ThreadDebugger", "consume: " + (SystemClock.uptimeMillis() - start));
+
+                if (NEED_PRINT_COST) {
+                    Log.d("ThreadDebugger", "refreshing debugger coast: " +
+                            (SystemClock.uptimeMillis() - start));
+                }
+
                 HANDLER.sendEmptyMessageDelayed(0, updateMilliSecond);
                 return false;
             }
