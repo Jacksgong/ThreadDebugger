@@ -28,14 +28,16 @@ ThreadDebugger and ThreadPool is installed by adding the following dependency to
 
 ```groovy
 dependencies {
-    // If you need use ThreadDebugger
-    compile 'cn.dreamtobe.threaddebugger:threaddebugger:1.1.0'
-    // If you need use ThreadPool
-    compile 'cn.dreamtobe.threaddebugger:threadpool:1.1.0'
+    // If you need use ThreadDebugger.
+    debugCompile 'cn.dreamtobe.threaddebugger:threaddebugger:1.2.0'
+    releaseCompile 'cn.dreamtobe.threaddebugger:threaddebugger-no-op:1.2.0'
+    // If you need use ThreadPool.
+    compile 'cn.dreamtobe.threaddebugger:threadpool:1.2.0'
 }
 ```
 
 - ThreadDebugger: [ ![Download](https://api.bintray.com/packages/jacksgong/maven/ThreadDebugger/images/download.svg) ](https://bintray.com/jacksgong/maven/ThreadDebugger/_latestVersion)
+- ThreadDebugger-no-op: [ ![Download](https://api.bintray.com/packages/jacksgong/maven/ThreadDebugger-threaddebugger-no-op/images/download.svg) ](https://bintray.com/jacksgong/maven/ThreadDebugger-threaddebugger-no-op/_latestVersion)
 - ThreadPool: [ ![Download](https://api.bintray.com/packages/jacksgong/maven/ThreadDebugger-threadpool/images/download.svg) ](https://bintray.com/jacksgong/maven/ThreadDebugger-threadpool/_latestVersion)
 
 ## II. Start monitor

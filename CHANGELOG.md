@@ -2,6 +2,14 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.2.0
+
+_2016-09-02_
+
+#### New Interfaces
+
+- Add `threaddebugger-no-op`: is lighter, it does not has any operation of `threaddebugger`, only has some empty classes, for don't import `threaddebugger` when release compile.
+
 ## Version 1.1.0
 
 _2016-09-01_
