@@ -183,13 +183,13 @@ drawUpUnknownInfo: Unknow thread count = 4. Unknow thread differ = 0. unknown[hw
 
 | 方法 | 功能
 | --- | ---
-| newExceedWaitPool | 在满足通用规则的前提下，当任务数大于maximumPoolSize，溢出的任务会在溢出等待队列中等待，直到有任务执行完成，线程空闲出来再进行执行，溢出等待队列符合Fifo进出队列规则
-| newExceedDiscardPool | 在满足通用规则的前提下，当任务数大于maximumPoolSize，溢出的任务会直接被丢弃
-| newExceedCallerRunsPool | 在满足通用规则的前提下，当任务数大于maximumPoolSize，溢出的任务在调用线程执行方法(`execute`/`submit`)所在线程直接执行
-| newExceedCallImmediatelyPool | 在满足通用规则的前提下，当任务数大于maximumPoolSize，溢出的任务在全局缓存线程池中直接执行
-| newSinglePool | 规则与`Executors#newSingleThreadExecutor()`相同
-| newFixedPool | 规则与`Executors#newFixedThreadPool(int)`相同
-| newCachedPool | 规则与`Executors#newCachedThreadPool()`相同
+| newExceedWaitPool | 在满足**通用规则**的前提下，当任务数大于maximumPoolSize，溢出的任务会在溢出等待队列中等待，直到有任务执行完成，线程空闲出来再进行执行，溢出等待队列符合Fifo进出队列规则
+| newExceedDiscardPool | 在满足**通用规则**的前提下，当任务数大于maximumPoolSize，溢出的任务会直接被丢弃
+| newExceedCallerRunsPool | 在满足**通用规则**的前提下，当任务数大于maximumPoolSize，溢出的任务在调用线程执行方法(`execute`/`submit`)所在线程直接执行
+| newExceedCallImmediatelyPool | 在满足**通用规则**的前提下，当任务数大于maximumPoolSize，溢出的任务在全局缓存线程池中直接执行
+| newSinglePool | 规则与`java.util.concurrent.Executors#newSingleThreadExecutor()`相同
+| newFixedPool | 规则与`java.util.concurrent.Executors#newFixedThreadPool(int)`相同
+| newCachedPool | 规则与`java.util.concurrent.Executors#newCachedThreadPool()`相同
 
 
 ## VI. Demo项目

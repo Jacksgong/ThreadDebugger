@@ -8,9 +8,17 @@
 
 ---
 
+This Github includes: Threads debugger(threaddebugger)、Thread pool factory(threadpools).
+
+#### Thread debugger
+
 There are several ways to debugger the activity of threads in the application, such as the Allocation Tracking from Android Studio Monitor by the way there are information about the running threads, or recording the Method Profiling from the Android Device Monitor by the way it also present the running threads information, but they are a little too heavy, and not flexible enough sometimes.
 
 With this ThreadDebugger, you don't need to worry about how long duration you recording, and you can find out the changing of the threads activity very easy.
+
+#### Thread pool factory
+
+The executor from this thread pool factory will require each task provide its exact name to facilitate debugging, and making create some thread pools in the common rule very convenient.
 
 ---
 
@@ -160,22 +168,29 @@ drawUpUnknownInfo: Unknow thread count = 4. Unknow thread differ = 0. unknown[hw
 | isSizeChanged() | Whether threads size has changed.
 | isChanged() | Whether threads has changed.
 
-## V. Method in ThreadPools
+## V. ThreadPools
 
 > The executor from this thread pool factory will require each task in it to provide its exact name to facilitate debugging.
 
 > - Entrance: [ThreadPools](https://github.com/Jacksgong/ThreadDebugger/blob/master/threadpool/src/main/java/cn/dreamtobe/threadpool/ThreadPools.java)
 > - Demo: [DemoThreadPoolCentral](https://github.com/Jacksgong/ThreadDebugger/blob/master/demo/src/main/java/cn/dreamtobe/threaddebugger/demo/DemoThreadPoolCentral.java)
 
+#### 1. Basic Rule
+
+When a new task is submitted in method `execute(Runnable)`, and fewer than `corePoolSize` threads are running, a new thread is created to handle the request, even if other worker threads are idle. If there are more than `corePoolSize` but less than `maximumPoolSize` threads running, a new thread is created to handle the request too, but when it turn to idle and the interval time of waiting for new tasks more than `keepAliveTime`, it will be terminate to reduce the cost of resources.
+
+
+#### 2. Methods in ThreadPools
+
 | Method | Function
 | --- | ---
-| newExceedWaitPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be enqueued to the waiting queue, and will be executed when the size of active command less than the {@code maximumPoolSize}.
-| newExceedDiscardPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be discard.
-| newExceedCallerRunsPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be executed immediately in the caller thread.
-| newExceedCallImmediatelyPool | If the size of active command equal to the {@code maximumPoolSize}, the further command will be executed immediately in the global temporary unbound thread pool.
-| newSinglePool | The same to the `Executors#newSingleThreadExecutor()`.
-| newFixedPool | The same to the `Executors#newFixedThreadPool(int)`.
-| newCachedPool | The same to the `Executors#newCachedThreadPool()`.
+| newExceedWaitPool | Under the premise of satisfying the **Basic Rules**, if there are `maximumPoolSize` tasks running, the further task will be enqueued to the waiting queue, and will be executed when the size of running tasks less than `maximumPoolSize`.
+| newExceedDiscardPool | Under the premise of satisfying the **Basic Rules**, if there are `maximumPoolSize` tasks running, the further task will be discard.
+| newExceedCallerRunsPool | Under the premise of satisfying the **Basic Rules**, if there are `maximumPoolSize` tasks running, the further task will be executed immediately in the caller thread.
+| newExceedCallImmediatelyPool | Under the premise of satisfying the **Basic Rules**, if there are `maximumPoolSize` tasks running, the further task will be executed immediately in the global temporary unbound thread pool.
+| newSinglePool | The same to the `java.util.concurrent.Executors#newSingleThreadExecutor()`.
+| newFixedPool | The same to the `java.util.concurrent.Executors#newFixedThreadPool(int)`.
+| newCachedPool | The same to the `java.util.concurrent.Executors#newCachedThreadPool()`.
 
 
 ## VI. Demo Project
