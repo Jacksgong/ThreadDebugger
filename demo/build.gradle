@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'ThreadDebuggerDemoKey'
+            keyPassword 'threaddebugger'
+            storeFile file('threaddebuggerdemo.jks')
+            storePassword 'threaddebugger'
+        }
+    }
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion BUILD_TOOLS_VERSION as String
-
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion COMPILE_SDK_VERSION as int
@@ -14,12 +21,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
 
 dependencies {
     compile 'com.android.support:appcompat-v7:24.2.0'
-    compile project(':threaddebugger')
+    debugCompile project(':threaddebugger')
+    releaseCompile project(':threaddebugger-no-op')
     compile project(':threadpool')
 }
