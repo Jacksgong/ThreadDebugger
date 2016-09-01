@@ -26,7 +26,7 @@ The executor from this thread pool factory will require each task provide its ex
 
 ThreadDebugger and ThreadPool is installed by adding the following dependency to your `build.gradle` file:
 
-```
+```groovy
 dependencies {
     // If you need use ThreadDebugger
     compile 'cn.dreamtobe.threaddebugger:threaddebugger:1.1.0'

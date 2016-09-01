@@ -26,7 +26,7 @@ ThreadDebugger是一个简单易用的线程调试器，可以帮助您随时查
 
 添加下面的依赖到`build.gradle`中:
 
-```
+```groovy
 dependencies {
     // If you need use ThreadDebugger
     compile 'cn.dreamtobe.threaddebugger:threaddebugger:1.1.0'
