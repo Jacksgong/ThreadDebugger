@@ -29,9 +29,9 @@ ThreadDebugger and ThreadPool is installed by adding the following dependency to
 ```
 dependencies {
     // If you need use ThreadDebugger
-    compile 'cn.dreamtobe.threaddebugger:threaddebugger:1.0.1'
+    compile 'cn.dreamtobe.threaddebugger:threaddebugger:1.1.0'
     // If you need use ThreadPool
-    compile 'cn.dreamtobe.threaddebugger:threadpool:1.0.1'
+    compile 'cn.dreamtobe.threaddebugger:threadpool:1.1.0'
 }
 ```
 

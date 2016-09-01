@@ -29,9 +29,9 @@ ThreadDebugger是一个简单易用的线程调试器，可以帮助您随时查
 ```
 dependencies {
     // If you need use ThreadDebugger
-    compile 'cn.dreamtobe.threaddebugger:threaddebugger:1.0.1'
+    compile 'cn.dreamtobe.threaddebugger:threaddebugger:1.1.0'
     // If you need use ThreadPool
-    compile 'cn.dreamtobe.threaddebugger:threadpool:1.0.1'
+    compile 'cn.dreamtobe.threaddebugger:threadpool:1.1.0'
 }
 ```
 
