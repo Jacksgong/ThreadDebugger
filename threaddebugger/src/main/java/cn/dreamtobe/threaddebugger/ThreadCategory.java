@@ -30,7 +30,9 @@ public class ThreadCategory implements Cloneable {
     private List<ThreadInfo> mInfoList;
 
     boolean is(String threadName) {
-        return threadName != null && threadName.toLowerCase().startsWith(mStartWidthKey);
+        return threadName != null &&
+                (threadName.compareToIgnoreCase(threadName) ==
+                        threadName.length() - mStartWidthKey.length());
     }
 
     int size() {
