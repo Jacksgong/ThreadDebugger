@@ -38,6 +38,7 @@ public class DemoApplication extends Application {
         super.onCreate();
         // Just for debug.
         ThreadPoolLog.NEED_LOG = true;
+        ThreadDebugger.NEED_PRINT_COST = true;
 
         //noinspection UnusedAssignment
         IThreadDebugger debugger = ThreadDebugger.install(
