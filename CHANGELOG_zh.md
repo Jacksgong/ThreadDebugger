@@ -2,6 +2,15 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.2.1
+
+_2016-09-09_
+
+#### 性能与提高
+
+- 提高性能: 使用`String#compareToIgnoreCase()`代替`String#toLowCase()`+`String#startWith()`来减少在`IThreadDebugger#refresh()`中的耗时。
+- 提高性能: 优化thread-debugger中的代码编写风格来优化其性能。
+
 ## Version 1.2.0
 
 _2016-09-02_
