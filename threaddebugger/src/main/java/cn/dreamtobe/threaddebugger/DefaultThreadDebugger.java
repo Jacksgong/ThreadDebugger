@@ -125,13 +125,13 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
     @Override
     public String drawUpEachThreadSize() {
-        final StringBuilder builder = createBasicInfoStringBuilder("drawUpEachThreadSize");
-
-        if (builder == null) {
-            return noData();
+        if (mCurThreadCategoryList == null) {
+            return NO_DATA;
         }
 
-        appendSize(builder);
+        final StringBuilder builder = createBasicInfoStringBuilder("drawUpEachThreadSize");
+
+        appendThreadCount(mSize, builder);
 
         final List<ThreadCategory> threadCategoryList = (List<ThreadCategory>)
                 ((ArrayList) mCurThreadCategoryList).clone();
@@ -139,14 +139,13 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
         for (ThreadCategory threadCategory : threadCategoryList) {
             if (threadCategory.size() > 0) {
-                builder.append(threadCategory.getAlias()).append(": ").
-                        append(threadCategory.size());
+                threadCategory.appendAlias(builder).append(threadCategory.size());
                 appendSplit(builder);
             }
         }
 
         if (unknowCategory.size() > 0) {
-            builder.append(unknowCategory.getAlias()).append(": ").append(unknowCategory.size());
+            unknowCategory.appendAlias(builder).append(unknowCategory.size());
         } else {
             deleteLastSplit(builder);
         }
@@ -156,13 +155,13 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
     @Override
     public String drawUpEachThreadInfo() {
-        final StringBuilder builder = createBasicInfoStringBuilder("drawUpEachThreadInfo");
-
-        if (builder == null) {
-            return noData();
+        if (mCurThreadCategoryList == null) {
+            return NO_DATA;
         }
 
-        appendSize(builder);
+        final StringBuilder builder = createBasicInfoStringBuilder("drawUpEachThreadInfo");
+
+        appendThreadCount(mSize, builder);
 
         final List<ThreadCategory> threadCategoryList = (List<ThreadCategory>)
                 ((ArrayList) mCurThreadCategoryList).clone();
@@ -199,10 +198,10 @@ class DefaultThreadDebugger implements IThreadDebugger {
     @Override
     public String drawUpUnknownInfo() {
         if (mCurUnknowCategory == null) {
-            return noData();
+            return NO_DATA;
         }
 
-        final StringBuilder builder = createBasicInfoStringBuilderUnChecked("drawUpUnknownInfo");
+        final StringBuilder builder = createBasicInfoStringBuilder("drawUpUnknownInfo");
 
         builder.append("Unknow thread count = ")
                 .append(mCurUnknowCategory.size()).append(". ");
@@ -243,7 +242,8 @@ class DefaultThreadDebugger implements IThreadDebugger {
                 ((ArrayList) mCurThreadCategoryList).clone();
 
 
-        for (int i = 0; i < curThreadCategoryList.size(); i++) {
+        final int length = curThreadCategoryList.size();
+        for (int i = 0; i < length; i++) {
             final ThreadCategory curThreadCategory = curThreadCategoryList.get(i);
             final ThreadCategory preThreadCategory = preThreadCategoryList == null ?
                     null : preThreadCategoryList.get(i);
@@ -256,14 +256,14 @@ class DefaultThreadDebugger implements IThreadDebugger {
     }
 
     private String drawUpEachThreadDiff(boolean showDetail) {
+        if (mCurThreadCategoryList == null) {
+            return NO_DATA;
+        }
+
         final StringBuilder builder = createBasicInfoStringBuilder("drawUpEachThread" +
                 (showDetail ? "Info" : "Size") + "Diff");
 
-        if (builder == null) {
-            return noData();
-        }
-
-        appendSize(builder);
+        appendThreadCount(mSize, builder);
 
         if (!showDetail && mPreviousSize == mSize) {
             return builder.append("Thread size has not changed.").toString();
@@ -286,7 +286,8 @@ class DefaultThreadDebugger implements IThreadDebugger {
         }
         builder.append(diff).append(". ");
 
-        for (int i = 0; i < curThreadCategoryList.size(); i++) {
+        final int length = curThreadCategoryList.size();
+        for (int i = 0; i < length; i++) {
             final ThreadCategory curThreadCategory = curThreadCategoryList.get(i);
             final ThreadCategory preThreadCategory = preThreadCategoryList == null ?
                     null : preThreadCategoryList.get(i);
@@ -314,7 +315,7 @@ class DefaultThreadDebugger implements IThreadDebugger {
                 return false;
             }
 
-            builder.append(curThreadCategory.getAlias()).append(": ");
+            curThreadCategory.appendAlias(builder);
             if (diff > 0) {
                 builder.append("+");
             }
@@ -331,7 +332,7 @@ class DefaultThreadDebugger implements IThreadDebugger {
         } else if (diff == 0) {
             return false;
         } else {
-            builder.append(curThreadCategory.getAlias()).append(": ");
+            curThreadCategory.appendAlias(builder);
             if (diff > 0) {
                 builder.append("+");
             }
@@ -341,16 +342,13 @@ class DefaultThreadDebugger implements IThreadDebugger {
         }
     }
 
-
-    private StringBuilder createBasicInfoStringBuilder(String methodName) {
-        if (mCurThreadCategoryList == null) {
-            return null;
-        }
-
-        return createBasicInfoStringBuilderUnChecked(methodName);
+    private static StringBuilder appendThreadCount(final int count, StringBuilder builder) {
+        return builder.append("Thread count = ")
+                .append(count)
+                .append(". ");
     }
 
-    private StringBuilder createBasicInfoStringBuilderUnChecked(String methodName) {
+    private static StringBuilder createBasicInfoStringBuilder(String methodName) {
         StringBuilder builder = new StringBuilder();
         builder.append(methodName)
                 .append(": ");
@@ -358,24 +356,15 @@ class DefaultThreadDebugger implements IThreadDebugger {
         return builder;
     }
 
+    private final static String NO_DATA = "NO data";
+    private final static String CATEGORY_SPLIT = " | ";
 
-    private StringBuilder appendSize(StringBuilder builder) {
-        return builder.append("Thread count = ")
-                .append(mSize)
-                .append(". ");
+    private static void deleteLastSplit(StringBuilder builder) {
+        builder.delete(builder.length() - CATEGORY_SPLIT.length(), builder.length());
     }
 
-    @SuppressWarnings("SameReturnValue")
-    private String noData() {
-        return "No data";
-    }
-
-    private void deleteLastSplit(StringBuilder builder) {
-        builder.delete(builder.length() - " | ".length(), builder.length());
-    }
-
-    private void appendSplit(StringBuilder builder) {
-        builder.append(" | ");
+    private static void appendSplit(StringBuilder builder) {
+        builder.append(CATEGORY_SPLIT);
     }
 
 }

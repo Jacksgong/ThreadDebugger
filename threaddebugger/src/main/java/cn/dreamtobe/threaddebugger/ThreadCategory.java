@@ -64,8 +64,8 @@ public class ThreadCategory implements Cloneable {
         return builder.toString();
     }
 
-    public String getAlias() {
-        return mAlias;
+    public StringBuilder appendAlias(StringBuilder builder) {
+        return builder.append(mAlias).append(": ");
     }
 
     private final static List<String> EMPTY = new ArrayList<>();
