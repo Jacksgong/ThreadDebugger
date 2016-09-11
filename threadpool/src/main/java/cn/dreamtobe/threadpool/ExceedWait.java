@@ -64,10 +64,19 @@ public final class ExceedWait {
         @Override
         public Runnable poll(long timeout, TimeUnit unit) throws InterruptedException {
             ThreadPoolLog.d(TAG, "poll() called with: timeout = [%d], unit = [%s]", timeout, unit);
-            Runnable result = super.poll(timeout, unit);
+            // Step 1. Take a glance, to find out whether there is any item in the main queue.
+            Runnable result = super.poll();
+            // Step 2. If there isn't any item in the main queue, and the exceed queue is available,
+            // poll item from the exceed queue directly.
             if (mExceedQueue.size() > 0 && result == null) {
-                result = mExceedQueue.poll(timeout, unit);
+                result = mExceedQueue.poll();
             }
+            // Step 3. If there isn't any item in the main queue and the exceed queue, wait
+            // timeout(unit) time for another thread to insert one in the main queue.
+            if (result == null) {
+                result = super.poll(timeout, unit);
+            }
+
             ThreadPoolLog.d(TAG, "poll() returned: %s", result);
             return result;
         }
