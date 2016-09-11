@@ -2,6 +2,18 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.3.0
+
+_2016-09-11_
+
+#### 新接口
+
+- 新增 `ExceedWait.java`: 暴露`exceed-wait-pool`的组件，使得它更加易于拓展。
+
+#### 性能与提高
+
+- 提高实用性: 降低`thread-pool`库的minSDK版本: 9->7。
+
 ## Version 1.2.1
 
 _2016-09-09_

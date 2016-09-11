@@ -2,6 +2,18 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.3.0
+
+_2016-09-11_
+
+#### New Interfaces
+
+- Add `ExceedWait.java`: Expose components of the `exceed-wait-pool` to make it more flexible to extend.
+
+#### Enhancement
+
+- Improve Practicability: Downgrade the min SDK version of the thread-pool library: 9->7.
+
 ## Version 1.2.1
 
 _2016-09-09_
