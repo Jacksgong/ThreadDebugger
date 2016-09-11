@@ -2,6 +2,14 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.3.2
+
+_2016-09-11_
+
+#### 修复
+
+- 修复(thread-pool): 对于`exceed-wait-pool`，当`exceed-queue`中存在任务需要执行的时候，错误的还在等待主队列，导致`exceed-queue`中的队列无法及时的被执行。
+
 ## Version 1.3.1
 
 _2016-09-11_

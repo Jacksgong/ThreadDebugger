@@ -2,6 +2,14 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.3.2
+
+_2016-09-11_
+
+#### Fixes
+
+- Fix(thread-pool): For `exceed-wait-pool`, Mistake still to wait for a command in the main queue when there are commands in the `exceed-queue` need to execute.
+
 ## Version 1.3.1
 
 _2016-09-11_
