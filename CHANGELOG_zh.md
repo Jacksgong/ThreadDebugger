@@ -2,6 +2,14 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.3.1
+
+_2016-09-11_
+
+#### 修复
+
+- 修复: `ExceedWait.Queue`的构造函数是`package visible`导致无法直接创建的问题。
+
 ## Version 1.3.0
 
 _2016-09-11_

@@ -2,6 +2,14 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.3.1
+
+_2016-09-11_
+
+#### Fixes
+
+- Fix: The construct method of `ExceedWait.Queue` is `package visible`, result in can't create it directly.
+
 ## Version 1.3.0
 
 _2016-09-11_
