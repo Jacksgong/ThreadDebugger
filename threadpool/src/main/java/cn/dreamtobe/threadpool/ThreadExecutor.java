@@ -16,6 +16,9 @@
 
 package cn.dreamtobe.threadpool;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+
 import java.security.InvalidParameterException;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -47,27 +50,39 @@ public class ThreadExecutor implements IExecutor {
         mExecutor.execute(runnable);
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     public <T> Future<T> submit(String name, Runnable task, T result) {
         if (task == null) throw new NullPointerException();
-        RunnableFuture<T> fTask = new FutureTask(task, result);
-        execute(name, fTask);
+        RunnableFuture<T> fTask = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            fTask = new FutureTask(task, result);
+            execute(name, fTask);
+        }
         return fTask;
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     public Future<?> submit(String name, Runnable task) {
         if (task == null) throw new NullPointerException();
-        RunnableFuture<Void> fTask = new FutureTask(task, null);
-        execute(name, fTask);
+        RunnableFuture<Void> fTask = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            fTask = new FutureTask(task, null);
+            execute(name, fTask);
+        }
         return fTask;
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     public <T> Future<T> submit(String name, Callable<T> task) {
         if (task == null) throw new NullPointerException();
-        RunnableFuture<T> fTask = new FutureTask(task);
-        execute(name, fTask);
+        RunnableFuture<T> fTask = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            fTask = new FutureTask(task);
+            execute(name, fTask);
+        }
         return fTask;
     }
 
