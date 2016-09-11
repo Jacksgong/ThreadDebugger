@@ -39,7 +39,7 @@ public final class ExceedWait {
             if (!executor.isShutdown()) {
                 ThreadPoolLog.d(TAG, "put the rejected command to the exceed queue" +
                         " in the rejectedExecution method: %s", r);
-                ((Queue) executor.getQueue()).putExceed(r);
+                ((Queue) executor.getQueue()).putExceed(r, executor);
             }
         }
     }
@@ -48,6 +48,7 @@ public final class ExceedWait {
 
         private final static String TAG = "ExceedWaitQueue";
         private final LinkedBlockingQueue<Runnable> mExceedQueue = new LinkedBlockingQueue<>();
+        private volatile boolean mLocking = false;
 
         public Queue() {
             super(true);
@@ -74,7 +75,12 @@ public final class ExceedWait {
             // Step 3. If there isn't any item in the main queue and the exceed queue, wait
             // timeout(unit) time for another thread to insert one in the main queue.
             if (result == null) {
-                result = super.poll(timeout, unit);
+                mLocking = true;
+                try {
+                    result = super.poll(timeout, unit);
+                } finally {
+                    mLocking = false;
+                }
             }
 
             ThreadPoolLog.d(TAG, "poll() returned: %s", result);
@@ -108,8 +114,21 @@ public final class ExceedWait {
             return mExceedQueue.size();
         }
 
-        public void putExceed(Runnable e) {
+        public void putExceed(Runnable e, ThreadPoolExecutor executor) {
             mExceedQueue.offer(e);
+
+            final int activeCount = executor.getActiveCount();
+            if (mLocking || activeCount <= 0) {
+                // In this case( the main queue is waiting for inserting or the active count is less
+                // than 0), we need to wake up the pool manually with the command from the head of
+                // exceed-queue.
+                final Runnable next = mExceedQueue.poll();
+                if (next != null) {
+                    ThreadPoolLog.d(TAG, "putExceed and mLocking(%B), activeCount(%d), need to " +
+                            "wake up the pool with next(%s)", mLocking, activeCount, next);
+                    executor.execute(next);
+                }
+            }
         }
 
         public List<Runnable> drainExceedQueue() {

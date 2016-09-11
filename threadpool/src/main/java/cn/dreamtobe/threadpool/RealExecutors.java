@@ -51,7 +51,7 @@ public class RealExecutors {
         public void execute(Runnable command) {
             final ExceedWait.Queue queue = (ExceedWait.Queue) getQueue();
             if (!isShutdown() && queue.exceedSize() > 0) {
-                queue.putExceed(command);
+                queue.putExceed(command, this);
                 ThreadPoolLog.d(TAG, "put the rejected command to the exceed queue in " +
                         "the execute method: %s", command);
                 return;
