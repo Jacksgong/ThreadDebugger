@@ -2,23 +2,7 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
-## Version 1.3.2
-
-_2016-09-11_
-
-#### Fixes
-
-- Fix(thread-pool): For `exceed-wait-pool`, Mistake still to wait for a command in the main queue when there are commands in the `exceed-queue` need to execute.
-
-## Version 1.3.1
-
-_2016-09-11_
-
-#### Fixes
-
-- Fix: The construct method of `ExceedWait.Queue` is `package visible`, result in can't create it directly.
-
-## Version 1.3.0
+## Version 1.3.3
 
 _2016-09-11_
 
@@ -29,6 +13,12 @@ _2016-09-11_
 #### Enhancement
 
 - Improve Practicability: Downgrade the min SDK version of the thread-pool library: 9->7.
+
+#### Fixes
+
+- Fix(thread-pool): Cover the case of only the `exceed-queue` has commands need to execute with the main queue is waiting for a command or there is no active command in the `exceed-wait-pool`.
+- Fix(thread-pool): For `exceed-wait-pool`, Mistake still to wait for a command in the main queue when there are commands in the `exceed-queue` need to execute.
+- Fix: The construct method of `ExceedWait.Queue` is `package visible`, result in can't create it directly.
 
 ## Version 1.2.1
 

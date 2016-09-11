@@ -2,23 +2,7 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
-## Version 1.3.2
-
-_2016-09-11_
-
-#### 修复
-
-- 修复(thread-pool): 对于`exceed-wait-pool`，当`exceed-queue`中存在任务需要执行的时候，错误的还在等待主队列，导致`exceed-queue`中的队列无法及时的被执行。
-
-## Version 1.3.1
-
-_2016-09-11_
-
-#### 修复
-
-- 修复: `ExceedWait.Queue`的构造函数是`package visible`导致无法直接创建的问题。
-
-## Version 1.3.0
+## Version 1.3.3
 
 _2016-09-11_
 
@@ -29,6 +13,12 @@ _2016-09-11_
 #### 性能与提高
 
 - 提高实用性: 降低`thread-pool`库的minSDK版本: 9->7。
+
+#### 修复
+
+- 修复(thread-pool): 覆盖当仅仅只有`exceed-queue`中有需要执行的任务的时候，主队列还在等待任务入队或者没有执行中的任务的情况。
+- 修复(thread-pool): 对于`exceed-wait-pool`，当`exceed-queue`中存在任务需要执行的时候，错误的还在等待主队列，导致`exceed-queue`中的队列无法及时的被执行。
+- 修复: `ExceedWait.Queue`的构造函数是`package visible`导致无法直接创建的问题。
 
 ## Version 1.2.1
 
