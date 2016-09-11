@@ -49,7 +49,7 @@ public final class ExceedWait {
         private final static String TAG = "ExceedWaitQueue";
         private final LinkedBlockingQueue<Runnable> mExceedQueue = new LinkedBlockingQueue<>();
 
-        Queue() {
+        public Queue() {
             super(true);
         }
 
