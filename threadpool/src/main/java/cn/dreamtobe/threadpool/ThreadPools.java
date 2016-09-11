@@ -56,7 +56,7 @@ public class ThreadPools {
                                               int maximumPoolSize, long keepAliveTime, TimeUnit unit,
                                               String prefixName) {
         return new ThreadExecutor(new RealExecutors.
-                ExceedWait(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
+                ExceedWaitExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
     }
 
     /**
@@ -79,7 +79,7 @@ public class ThreadPools {
                                                  long keepAliveTime, TimeUnit unit,
                                                  String prefixName) {
         return new ThreadExecutor(new RealExecutors.
-                ExceedDiscard(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
+                ExceedDiscardExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
     }
 
     /**
@@ -102,7 +102,7 @@ public class ThreadPools {
                                                     long keepAliveTime, TimeUnit unit,
                                                     String prefixName) {
         return new ThreadExecutor(new RealExecutors.
-                ExceedCallerRuns(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
+                ExceedCallerRunsExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
     }
 
     /**
@@ -125,7 +125,7 @@ public class ThreadPools {
                                                          long keepAliveTime, TimeUnit unit,
                                                          String prefixName) {
         return new ThreadExecutor(new RealExecutors.
-                ExceedCallImmediately(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
+                ExceedCallImmediatelyExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
     }
 
     /**
@@ -135,7 +135,7 @@ public class ThreadPools {
      * @return The executor of a new Single thread pool.
      */
     public static IExecutor newSinglePool(String prefixName) {
-        return new ThreadExecutor(new RealExecutors.Single(prefixName));
+        return new ThreadExecutor(new RealExecutors.SinglePoolExecutor(prefixName));
     }
 
     /**
@@ -146,7 +146,7 @@ public class ThreadPools {
      * @return The executor of a new Fixed thread pool.
      */
     public static IExecutor newFixedPool(int threadCount, String prefixName) {
-        return new ThreadExecutor(new RealExecutors.Fixed(threadCount, prefixName));
+        return new ThreadExecutor(new RealExecutors.FixedPoolExecutor(threadCount, prefixName));
     }
 
     /**
@@ -160,7 +160,7 @@ public class ThreadPools {
      * @return the executor of a new Cached thread pool.
      */
     public static IExecutor newCachedPool(long keepAliveTime, TimeUnit unit, String prefixName) {
-        return new ThreadExecutor(new RealExecutors.Cached(keepAliveTime, unit, prefixName));
+        return new ThreadExecutor(new RealExecutors.CachedPoolExecutor(keepAliveTime, unit, prefixName));
     }
 
 }
