@@ -204,6 +204,7 @@ When a new task is submitted in method `execute(Runnable)`, and fewer than `core
 | newSinglePool | The same to the `java.util.concurrent.Executors#newSingleThreadExecutor()`.
 | newFixedPool | The same to the `java.util.concurrent.Executors#newFixedThreadPool(int)`.
 | newCachedPool | The same to the `java.util.concurrent.Executors#newCachedThreadPool()`.
+| newNoCorePool | If there are `threadCount` tasks are running, the further task will be enqueued to the waiting queue, and will be executed when the size of running tasks less than `threadCount`. If the thread in this pool is turn to idle and the interval time of waiting for new tasks more `keepAliveTime`, it will be terminate to reduce the cost of resources.
 
 
 ## VI. Demo Project

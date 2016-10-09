@@ -203,6 +203,7 @@ drawUpUnknownInfo: Unknow thread count = 4. Unknow thread differ = 0. unknown[hw
 | newSinglePool | 规则与`java.util.concurrent.Executors#newSingleThreadExecutor()`相同
 | newFixedPool | 规则与`java.util.concurrent.Executors#newFixedThreadPool(int)`相同
 | newCachedPool | 规则与`java.util.concurrent.Executors#newCachedThreadPool()`相同
+| newNoCorePool | 如果有`threadCount`个数的任务正在运行，再增加进来的任务将会进入等待队列中直到有线程空闲出来。如果空闲线程空闲的时间大于`keepAliveTime`，那么它将会被回收
 
 
 ## VI. Demo项目
