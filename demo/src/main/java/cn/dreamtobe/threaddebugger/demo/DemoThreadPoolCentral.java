@@ -37,8 +37,8 @@ public class DemoThreadPoolCentral {
     private static final IExecutor COMPUTATION = ThreadPools.newFixedPool(CPU_PROCESSORS,
             "computation");
 
-    private static final IExecutor NETWORK = ThreadPools.newExceedWaitPool(2, /** core **/
-            8, 2, TimeUnit.SECONDS, /** max, idle-time **/
+    private static final IExecutor NETWORK = ThreadPools.newNoCorePool(
+            3, 2, TimeUnit.SECONDS, /** max, idle-time **/
             "network");
 
     private static final IExecutor TEST1 = ThreadPools.newExceedDiscardPool(2, /** core **/
