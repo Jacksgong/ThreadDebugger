@@ -16,6 +16,9 @@
 
 package cn.dreamtobe.threadpool;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
@@ -30,6 +33,20 @@ import java.util.concurrent.TimeUnit;
 public class RealExecutors {
     private static final IExecutor TEMPORARY_CACHED_THREAD_POOL = ThreadPools.
             newCachedPool(5L, TimeUnit.SECONDS, "GlobalCachedThreadPool");
+
+    public static class NoCoreExecutor extends RealExecutor {
+
+        @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+        public NoCoreExecutor(int threadCount, long keepAliveTime, TimeUnit unit,
+                              String prefixName) {
+            super(threadCount, threadCount, keepAliveTime, unit,
+                    new LinkedBlockingQueue<Runnable>(),
+                    new AbortPolicy(),//never meet
+                    prefixName);
+
+            allowCoreThreadTimeOut(true);
+        }
+    }
 
     public static class ExceedWaitExecutor extends RealExecutor {
         private final static String TAG = "ExceedWait";

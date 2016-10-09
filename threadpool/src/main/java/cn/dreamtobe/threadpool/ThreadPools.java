@@ -16,6 +16,9 @@
 
 package cn.dreamtobe.threadpool;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -55,8 +58,12 @@ public class ThreadPools {
     public static IExecutor newExceedWaitPool(int corePoolSize,
                                               int maximumPoolSize, long keepAliveTime, TimeUnit unit,
                                               String prefixName) {
-        return new ThreadExecutor(new RealExecutors.
-                ExceedWaitExecutor(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName));
+        if (corePoolSize == 0) {
+            return newNoCorePool(maximumPoolSize, keepAliveTime, unit, prefixName);
+        }
+
+        return new ThreadExecutor(new RealExecutors.ExceedWaitExecutor(corePoolSize, maximumPoolSize,
+                keepAliveTime, unit, prefixName));
     }
 
     /**
@@ -161,6 +168,28 @@ public class ThreadPools {
      */
     public static IExecutor newCachedPool(long keepAliveTime, TimeUnit unit, String prefixName) {
         return new ThreadExecutor(new RealExecutors.CachedPoolExecutor(keepAliveTime, unit, prefixName));
+    }
+
+    /**
+     * If there are {@code threadCount} tasks are running, the further task will be enqueued to the
+     * waiting queue, and will be executed when the size of running tasks less than {@code threadCount}.
+     * If the thread in this pool is turn to idle and the interval time of waiting for new tasks more
+     * than {@code keepAliveTime}, it will be terminate to reduce the cost of resources.
+     * <p>
+     * <strong>Note:</strong> This method is only available for GINGERBREAD or further version.
+     *
+     * @param threadCount   the number of threads in pool.
+     * @param keepAliveTime the maximum time that excess idle threads will wait for new tasks before
+     *                      terminating.
+     * @param unit          the time unit for the {@code keepAliveTime} argument.
+     * @param prefixName    the prefix name of this thread pool.
+     * @return the executor of a new NoCore thread pool.
+     */
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    public static IExecutor newNoCorePool(int threadCount, long keepAliveTime, TimeUnit unit,
+                                          String prefixName) {
+        return new ThreadExecutor(new RealExecutors.NoCoreExecutor(threadCount, keepAliveTime, unit,
+                prefixName));
     }
 
 }
