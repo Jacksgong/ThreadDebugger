@@ -2,6 +2,18 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.4.0
+
+_2016-10-09_
+
+#### 新接口
+
+- 新增 `ThreadPools#newNoCorePool`: 如果有`threadCount`个数的任务正在运行，再增加进来的任务将会进入等待队列中直到有线程空闲出来。如果空闲线程空闲的时间大于`keepAliveTime`，那么它将会被回收。
+
+#### 性能与提高
+
+- 提高稳定性: 如果在调用`ThreadPools.newExceedWaitPool`时，所提供的`corePoolSize`等于`0`，那么我们会创建`NoCorePool`而非`ExceedWaitPool`，以此避免在高并发调度`ExceedWaitPool`的时候小概率出现`StackOverflow`的异常，因为在`ExceedWaitPool`中当`corePoolSize`为`0`并且高频率执行大量任务的时候，`getActiveCount()`的返回值有可能是`0`，但是实际的运行中的线程数是大于`0`的。
+
 ## Version 1.3.3
 
 _2016-09-11_

@@ -2,6 +2,18 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.4.0
+
+_2016-10-09_
+
+#### New Interfaces
+
+- Add `ThreadPools#newNoCorePool`: If there are `threadCount` tasks are running, the further task will be enqueued to the waiting queue, and will be executed when the size of running tasks less than `threadCount`. If the thread in this pool is turn to idle and the interval time of waiting for new tasks more `keepAliveTime`, it will be terminate to reduce the cost of resources.
+
+#### Enhancement
+
+- Improve Stability: If `corePoolSize` is equal to` 0` when `ThreadPools.newExceedWaitPool` is called, then we will create` NoCorePool` instead of `ExceedWaitPool` to avoid the small probability of `StackOverflow` because `getActiveCount()` may return `0` when `corePoolSize` is `0` in `ExceedWaitPool` and performs a large number of tasks at high frequencies, but the actual running thread The number is greater than `0`.
+
 ## Version 1.3.3
 
 _2016-09-11_
