@@ -24,7 +24,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.0'
-        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
 
         File file = project.rootProject.file('local.properties')
         if (file.exists()) {
@@ -33,9 +32,8 @@ buildscript {
             boolean upload2maven = properties.getProperty("for.upload") == "true"
             if (upload2maven) {
                 println ':global:include upload 2 maven classpath'
-                classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
+                classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
                 classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-                classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
             }
 
         }
