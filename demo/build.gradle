@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:appcompat-v7:25.2.0'
     debugCompile project(':threaddebugger')
     releaseCompile project(':threaddebugger-no-op')
     compile project(':threadpool')
