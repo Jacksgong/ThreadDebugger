@@ -34,6 +34,11 @@ public class ThreadDebuggers {
             }
 
             @Override
+            public IThreadDebugger ignoreUnknownCategory() {
+                return this;
+            }
+
+            @Override
             public void refresh() {
             }
 

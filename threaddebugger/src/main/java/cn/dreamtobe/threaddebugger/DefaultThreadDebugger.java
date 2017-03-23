@@ -25,6 +25,8 @@ import java.util.Set;
 
 class DefaultThreadDebugger implements IThreadDebugger {
 
+    private boolean mAlwaysPrintUnknown = true;
+
     private int mPreviousSize = 0;
     private int mSize = 0;
 
@@ -105,6 +107,12 @@ class DefaultThreadDebugger implements IThreadDebugger {
     }
 
     @Override
+    public IThreadDebugger ignoreUnknownCategory() {
+        mAlwaysPrintUnknown = false;
+        return this;
+    }
+
+    @Override
     public void refresh() {
         Set<Thread> threads = Thread.getAllStackTraces().keySet();
 
@@ -144,7 +152,7 @@ class DefaultThreadDebugger implements IThreadDebugger {
             }
         }
 
-        if (unknowCategory.size() > 0) {
+        if (mAlwaysPrintUnknown && unknowCategory.size() > 0) {
             unknowCategory.appendAlias(builder).append(unknowCategory.size());
         } else {
             deleteLastSplit(builder);
@@ -175,7 +183,7 @@ class DefaultThreadDebugger implements IThreadDebugger {
         }
 
 
-        if (unknowCategory.size() > 0) {
+        if (mAlwaysPrintUnknown && unknowCategory.size() > 0) {
             builder.append(unknowCategory);
         } else {
             deleteLastSplit(builder);
@@ -219,7 +227,9 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
     @Override
     public boolean isSizeChanged() {
-        return mSize != mPreviousSize;
+        if (mAlwaysPrintUnknown) return mSize != mPreviousSize;
+        else return mCurThreadCategoryList != null && mPreThreadCategoryList != null
+                && mCurThreadCategoryList.size() != mPreThreadCategoryList.size();
     }
 
     @Override
@@ -231,7 +241,7 @@ class DefaultThreadDebugger implements IThreadDebugger {
             return true;
         }
 
-        if (mCurUnknowCategory != null) {
+        if (mAlwaysPrintUnknown && mCurUnknowCategory != null) {
             if (mCurUnknowCategory.isDiff(mPreUnknowCategory)) {
                 return true;
             }
@@ -274,11 +284,6 @@ class DefaultThreadDebugger implements IThreadDebugger {
         final List<ThreadCategory> curThreadCategoryList = (List<ThreadCategory>)
                 ((ArrayList) mCurThreadCategoryList).clone();
 
-        final ThreadCategory preUnknowCategory = mPreUnknowCategory == null ?
-                null : mPreUnknowCategory.clone();
-        final ThreadCategory curUnknowCategory = mCurUnknowCategory == null ?
-                null : mCurUnknowCategory.clone();
-
         builder.append("Thread differ : ");
         final int diff = mSize - mPreviousSize;
         if (diff > 0) {
@@ -296,10 +301,20 @@ class DefaultThreadDebugger implements IThreadDebugger {
             }
         }
 
-        if (curUnknowCategory == null ||
-                !appendDiff(builder, preUnknowCategory, curUnknowCategory, true)) {
+        if (mAlwaysPrintUnknown) {
+            final ThreadCategory preUnknowCategory = mPreUnknowCategory == null ?
+                    null : mPreUnknowCategory.clone();
+            final ThreadCategory curUnknowCategory = mCurUnknowCategory == null ?
+                    null : mCurUnknowCategory.clone();
+
+            if (curUnknowCategory == null ||
+                    !appendDiff(builder, preUnknowCategory, curUnknowCategory, true)) {
+                deleteLastSplit(builder);
+            }
+        } else {
             deleteLastSplit(builder);
         }
+
 
         return builder.toString();
     }

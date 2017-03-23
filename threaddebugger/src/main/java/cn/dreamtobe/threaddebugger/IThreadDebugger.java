@@ -35,6 +35,14 @@ public interface IThreadDebugger {
     IThreadDebugger add(String startWithKey, String alias);
 
     /**
+     * Only print thread info which you explicitly add through {@link #add(String)} or
+     * {@link #add(String, String)} for method {@link #drawUpEachThreadInfo()}、
+     * {@link #drawUpEachThreadInfo()}、{@link #drawUpEachThreadSizeDiff()}、
+     * {@link #drawUpEachThreadInfoDiff()}、{@link #isChanged()}、{@link #isSizeChanged()}
+     */
+    IThreadDebugger ignoreUnknownCategory();
+
+    /**
      * Refresh threads situation.
      */
     void refresh();
