@@ -145,16 +145,18 @@ class DefaultThreadDebugger implements IThreadDebugger {
                 ((ArrayList) mCurThreadCategoryList).clone();
         final ThreadCategory unknowCategory = mCurUnknowCategory.clone();
 
+        boolean hasSplit = false;
         for (ThreadCategory threadCategory : threadCategoryList) {
             if (threadCategory.size() > 0) {
                 threadCategory.appendAlias(builder).append(threadCategory.size());
+                hasSplit = true;
                 appendSplit(builder);
             }
         }
 
         if (mAlwaysPrintUnknown && unknowCategory.size() > 0) {
             unknowCategory.appendAlias(builder).append(unknowCategory.size());
-        } else {
+        } else if (hasSplit) {
             deleteLastSplit(builder);
         }
 
@@ -175,8 +177,10 @@ class DefaultThreadDebugger implements IThreadDebugger {
                 ((ArrayList) mCurThreadCategoryList).clone();
         final ThreadCategory unknowCategory = mCurUnknowCategory.clone();
 
+        boolean hasSplit = false;
         for (ThreadCategory threadCategory : threadCategoryList) {
             if (threadCategory.size() > 0) {
+                hasSplit = true;
                 builder.append(threadCategory);
                 appendSplit(builder);
             }
@@ -185,7 +189,7 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
         if (mAlwaysPrintUnknown && unknowCategory.size() > 0) {
             builder.append(unknowCategory);
-        } else {
+        } else if (hasSplit) {
             deleteLastSplit(builder);
         }
 
@@ -291,12 +295,14 @@ class DefaultThreadDebugger implements IThreadDebugger {
         }
         builder.append(diff).append(". ");
 
+        boolean hasSplit = false;
         final int length = curThreadCategoryList.size();
         for (int i = 0; i < length; i++) {
             final ThreadCategory curThreadCategory = curThreadCategoryList.get(i);
             final ThreadCategory preThreadCategory = preThreadCategoryList == null ?
                     null : preThreadCategoryList.get(i);
             if (appendDiff(builder, preThreadCategory, curThreadCategory, showDetail)) {
+                hasSplit = true;
                 appendSplit(builder);
             }
         }
@@ -307,11 +313,11 @@ class DefaultThreadDebugger implements IThreadDebugger {
             final ThreadCategory curUnknowCategory = mCurUnknowCategory == null ?
                     null : mCurUnknowCategory.clone();
 
-            if (curUnknowCategory == null ||
-                    !appendDiff(builder, preUnknowCategory, curUnknowCategory, true)) {
+            if ((curUnknowCategory == null ||
+                    !appendDiff(builder, preUnknowCategory, curUnknowCategory, true)) && hasSplit) {
                 deleteLastSplit(builder);
             }
-        } else {
+        } else if (hasSplit) {
             deleteLastSplit(builder);
         }
 
