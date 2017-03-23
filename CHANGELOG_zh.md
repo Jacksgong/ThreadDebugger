@@ -2,13 +2,18 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
-## Version 1.5.0
+## Version 1.5.2
 
 _2017-03-23_
 
 #### 新接口
 
 - 新增 `ThreadDebugger#ignoreUnknownCategory`: 在进行输出时忽略未通过`ThreadDebugger#add`主动添加分类的线程变化。
+
+#### 修复
+
+- 修复: 修复了在错误的时机删除的输出分隔符。
+- 修复: 修复在一些场景下，无法准确的匹配线程名的开头部分。
 
 ## Version 1.4.0
 
