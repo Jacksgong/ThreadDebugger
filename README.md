@@ -71,6 +71,8 @@ dependencies {
 
 ## III. Output Logcat
 
+> If the time is your consider, please using `adb logcat -v time` instead of `adb logcat -v raw` on bellow commands.
+
 #### 1. drawUpEachThreadInfoDiff
 
 > `adb logcat -v raw | grep drawUpEachThreadInfoDiff:`
