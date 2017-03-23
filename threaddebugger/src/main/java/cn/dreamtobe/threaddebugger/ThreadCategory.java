@@ -35,7 +35,7 @@ public class ThreadCategory implements Cloneable {
         }
 
         final int diff = threadName.length() - mStartWidthKey.length();
-        return diff >= 0 && threadName.compareToIgnoreCase(mStartWidthKey) == diff;
+        return diff >= 0 && threadName.startsWith(mStartWidthKey);
 
     }
 
