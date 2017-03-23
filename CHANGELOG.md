@@ -2,6 +2,14 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.5.0
+
+_2017-03-23_
+
+#### New Interfaces
+
+- Add `ThreadDebugger#ignoreUnknownCategory`: Only print thread info which you explicitly add through `ThreadDebugger#add` for method `ThreadDebugger#drawUpEachThreadInfo`, `ThreadDebugger#drawUpEachThreadInfo`, `ThreadDebugger#drawUpEachThreadSizeDiff`, `ThreadDebugger#drawUpEachThreadInfoDiff`, `ThreadDebugger#isChanged`, `ThreadDebugger#isSizeChanged`.
+
 ## Version 1.4.0
 
 _2016-10-09_
