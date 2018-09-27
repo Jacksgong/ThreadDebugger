@@ -6,8 +6,6 @@ android {
 
     defaultConfig {
         minSdkVersion 7
-        targetSdkVersion COMPILE_SDK_VERSION as int
-        versionCode VERSION_CODE as int
         versionName VERSION_NAME as String
     }
     buildTypes {
@@ -18,13 +16,9 @@ android {
     }
 }
 
-if (isForUpload2Maven()) {
-    apply from: 'https://raw.githubusercontent.com/Jacksgong/JCenter/master/installv1.gradle'
-    apply from: 'https://raw.githubusercontent.com/Jacksgong/JCenter/master/bintray_suffix1.gradle'
-    apply from: 'https://raw.githubusercontent.com/Jacksgong/JCenter/master/license.gradle'
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.squareup.assertj:assertj-android:1.1.1'
 }
 
-dependencies {
-    testCompile 'junit:junit:4.12'
-    testCompile 'com.squareup.assertj:assertj-android:1.1.1'
-}
+apply from: rootProject.file('gradle/mvn-push.gradle')

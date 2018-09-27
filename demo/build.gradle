@@ -12,9 +12,7 @@ android {
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion BUILD_TOOLS_VERSION as String
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion COMPILE_SDK_VERSION as int
-        versionCode VERSION_CODE as int
+        minSdkVersion 14
         versionName VERSION_NAME as String
     }
     buildTypes {
@@ -27,8 +25,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    debugCompile project(':threaddebugger')
-    releaseCompile project(':threaddebugger-no-op')
-    compile project(':threadpool')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    debugImplementation project(':threaddebugger')
+    releaseImplementation project(':threaddebugger-no-op')
+    implementation project(':threadpool')
 }
