@@ -2,6 +2,12 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.5.3
+
+_2018-09-28_
+
+修复当`worker count`等于`max-pool-size`并且有一个`worker-thread`正阻塞在等待队列有新的任务并且在队列有新任务了但是cpu时间片没有分配到该阻塞`worker-thread`的时候，ExceedWait出现Stackoverflow的问题
+
 ## Version 1.5.2
 
 _2017-03-23_

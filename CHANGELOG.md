@@ -2,6 +2,12 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.5.3
+
+_2018-09-28_
+
+- Fix stackoverflow on ExceedWait when worker count is meet max-pool-size and one-worker-thread is blocked waiting for queue available and cpu time slice not alloc for blocked thread after queue available
+
 ## Version 1.5.2
 
 _2017-03-23_
