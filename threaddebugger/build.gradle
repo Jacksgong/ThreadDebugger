@@ -1,11 +1,12 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.hugo'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion BUILD_TOOLS_VERSION as String
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 14
         versionName VERSION_NAME as String
     }
     buildTypes {
