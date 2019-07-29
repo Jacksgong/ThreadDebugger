@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.hugo'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
