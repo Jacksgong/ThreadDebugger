@@ -29,10 +29,10 @@ ThreadDebugger是一个简单易用的线程调试器，可以帮助您随时查
 ```groovy
 dependencies {
     // If you need use ThreadDebugger.
-    debugImplementation'cn.dreamtobe.threaddebugger:threaddebugger:1.5.3'
-    releaseImplementation'cn.dreamtobe.threaddebugger:threaddebugger-no-op:1.5.3'
+    debugImplementation'cn.dreamtobe.threaddebugger:threaddebugger:1.6.0'
+    releaseImplementation'cn.dreamtobe.threaddebugger:threaddebugger-no-op:1.6.0'
     // If you need use ThreadPool.
-    implementation'cn.dreamtobe.threaddebugger:threadpool:1.5.3'
+    implementation'cn.dreamtobe.threaddebugger:threadpool:1.6.0'
 }
 ```
 
