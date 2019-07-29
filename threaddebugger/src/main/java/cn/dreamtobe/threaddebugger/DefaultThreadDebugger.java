@@ -17,7 +17,6 @@ package cn.dreamtobe.threaddebugger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * The default thread debugger.
@@ -114,12 +113,14 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
     @Override
     public void refresh() {
-        Set<Thread> threads = Thread.getAllStackTraces().keySet();
+        final Thread[] threads = ThreadUtils.getAllThreads();
 
         mBuilder.reset();
 
         for (Thread thread : threads) {
-            mBuilder.process(thread.hashCode(), thread.getName());
+            if (thread != null){
+                mBuilder.process(thread.hashCode(), thread.getName());
+            }
         }
 
 
@@ -128,7 +129,7 @@ class DefaultThreadDebugger implements IThreadDebugger {
         mPreUnknowCategory = mCurUnknowCategory;
         mCurUnknowCategory = mBuilder.cloneUnknowCategory();
         mPreviousSize = mSize;
-        mSize = threads.size();
+        mSize = threads.length;
     }
 
     @Override
