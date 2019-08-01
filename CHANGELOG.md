@@ -2,6 +2,12 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.6.1
+
+_2019-08-01_
+
+- Fix: fix the count of thread not right exactly.
+
 ## Version 1.6.0
 
 _2019-07-29_
