@@ -29,10 +29,10 @@ ThreadDebugger and ThreadPool is installed by adding the following dependency to
 ```groovy
 dependencies {
     // If you need use ThreadDebugger.
-    debugImplementation'cn.dreamtobe.threaddebugger:threaddebugger:1.6.1'
-    releaseImplementation'cn.dreamtobe.threaddebugger:threaddebugger-no-op:1.6.1'
+    debugImplementation'cn.dreamtobe.threaddebugger:threaddebugger:1.6.2'
+    releaseImplementation'cn.dreamtobe.threaddebugger:threaddebugger-no-op:1.6.2'
     // If you need use ThreadPool.
-    implementation'cn.dreamtobe.threaddebugger:threadpool:1.6.1'
+    implementation'cn.dreamtobe.threaddebugger:threadpool:1.6.2'
 }
 ```
 

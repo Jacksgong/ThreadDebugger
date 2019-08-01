@@ -2,11 +2,12 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
-## Version 1.6.1
+## Version 1.6.2
 
 _2019-08-01_
 
 - 修复: 修复线程数计算不够准确的问题
+- 修复: 修复线程类型由于考虑大小写无法匹配问题
 
 ## Version 1.6.0
 
