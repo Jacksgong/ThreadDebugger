@@ -17,8 +17,10 @@
 package cn.dreamtobe.threaddebugger;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The thread category.
@@ -28,6 +30,7 @@ public class ThreadCategory implements Cloneable {
     private String mStartWidthKey;
     private String mAlias;
     private List<ThreadInfo> mInfoList;
+    private final static Map<String, String> THREAD_NAME_LOW_CACHE = new HashMap<>();
 
     boolean is(String threadName) {
         if (threadName == null) {
@@ -35,8 +38,15 @@ public class ThreadCategory implements Cloneable {
         }
 
         final int diff = threadName.length() - mStartWidthKey.length();
-        return diff >= 0 && threadName.startsWith(mStartWidthKey);
+        if (diff < 0) return false;
 
+        String lowCaseThreadName = THREAD_NAME_LOW_CACHE.get(threadName);
+        if (lowCaseThreadName == null) {
+            lowCaseThreadName = threadName.toLowerCase();
+            THREAD_NAME_LOW_CACHE.put(threadName, lowCaseThreadName);
+        }
+
+        return lowCaseThreadName.startsWith(mStartWidthKey);
     }
 
     int size() {
