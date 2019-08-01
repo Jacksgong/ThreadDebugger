@@ -117,19 +117,20 @@ class DefaultThreadDebugger implements IThreadDebugger {
 
         mBuilder.reset();
 
+        int size = 0;
         for (Thread thread : threads) {
-            if (thread != null){
+            if (thread != null) {
+                size++;
                 mBuilder.process(thread.hashCode(), thread.getName());
             }
         }
-
 
         mPreThreadCategoryList = mCurThreadCategoryList;
         mCurThreadCategoryList = mBuilder.cloneList();
         mPreUnknowCategory = mCurUnknowCategory;
         mCurUnknowCategory = mBuilder.cloneUnknowCategory();
         mPreviousSize = mSize;
-        mSize = threads.length;
+        mSize = size;
     }
 
     @Override

@@ -24,6 +24,9 @@ public class ThreadUtils {
 
     private static ThreadGroup rootGroup = null;
 
+    /**
+     * @return threads but its count not equal to real thread count, you need filter null manually.
+     */
     public static Thread[] getAllThreads() {
         ThreadGroup rootGroup = ThreadUtils.rootGroup;
         if (rootGroup == null) {
@@ -37,7 +40,8 @@ public class ThreadUtils {
 
         Thread[] threads = new Thread[rootGroup.activeCount()];
         while (rootGroup.enumerate(threads, true) == threads.length) {
-            threads = new Thread[threads.length * 2];
+            // thread array not big enough for enumerate try more
+            threads = new Thread[threads.length + threads.length / 2];
         }
 
         return threads;
