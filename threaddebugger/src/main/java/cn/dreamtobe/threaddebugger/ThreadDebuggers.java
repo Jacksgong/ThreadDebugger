@@ -50,6 +50,7 @@ public class ThreadDebuggers {
                 .add(CommonThreadKey.Media.AUDIO)
                 .add(CommonThreadKey.Media.MEDIA)
                 .add(CommonThreadKey.Media.EXO_PLAYER)
+                .add(CommonThreadKey.Others.THREAD_DEBUGGER)
                 .add(CommonThreadKey.Others.QUEUE);
     }
 }

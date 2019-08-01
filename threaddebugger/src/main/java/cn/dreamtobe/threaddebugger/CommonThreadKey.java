@@ -56,5 +56,6 @@ public interface CommonThreadKey {
 
     interface Others {
         String QUEUE = "Queue";
+        String THREAD_DEBUGGER = "ThreadDebugger";
     }
 }

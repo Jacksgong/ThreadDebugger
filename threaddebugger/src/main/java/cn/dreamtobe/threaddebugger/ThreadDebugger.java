@@ -73,7 +73,7 @@ public class ThreadDebugger {
                                                        final ThreadChangedCallback callback) {
         uninstall();
 
-        HandlerThread handlerThread = new HandlerThread("ThreadDebugger");
+        HandlerThread handlerThread = new HandlerThread(CommonThreadKey.Others.THREAD_DEBUGGER);
         handlerThread.start();
 
         HANDLER = new Handler(handlerThread.getLooper(), new Handler.Callback() {
