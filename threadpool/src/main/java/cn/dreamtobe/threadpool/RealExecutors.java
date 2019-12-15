@@ -49,7 +49,6 @@ public class RealExecutors {
     }
 
     public static class ExceedWaitExecutor extends RealExecutor {
-        private final static String TAG = "ExceedWait";
 
         public ExceedWaitExecutor(int corePoolSize,
                                   int maximumPoolSize, long keepAliveTime, TimeUnit unit, String prefixName,
@@ -62,18 +61,6 @@ public class RealExecutors {
                                   int maximumPoolSize, long keepAliveTime, TimeUnit unit, String prefixName) {
             this(corePoolSize, maximumPoolSize, keepAliveTime, unit, prefixName,
                     new ExceedWait.Queue(), new ExceedWait.RejectedHandler());
-        }
-
-        @Override
-        public void execute(Runnable command) {
-            final ExceedWait.Queue queue = (ExceedWait.Queue) getQueue();
-            if (!isShutdown() && queue.exceedSize() > 0) {
-                queue.putExceed(command, this);
-                ThreadPoolLog.d(TAG, "put the rejected command to the exceed queue in " +
-                        "the execute method: %s", command);
-                return;
-            }
-            super.execute(command);
         }
 
         @Override
