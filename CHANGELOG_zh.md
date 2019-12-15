@@ -2,6 +2,13 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.6.3
+
+_2019-12_15_
+
+- 修复: 修复极低概率下ExceedWait在等待队列的大小大于0并且运行中的任务小于等于0的时候可能出现stackoverflow异常的问题
+- 修复: 修复极小概率只有在有新任务进来的时候等待队列才能被消化的问题
+
 ## Version 1.6.2
 
 _2019-08-01_

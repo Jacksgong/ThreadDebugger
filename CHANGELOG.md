@@ -2,6 +2,13 @@
 
 > [CHANGELOG](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG.md)|[中文迭代日志](https://github.com/Jacksgong/ThreadDebugger/blob/master/CHANGELOG_zh.md)
 
+## Version 1.6.3
+
+_2019-12_15_
+
+- Fix: Fix low case for stack overflow when ExceedWait no active and exceed-queue more then one wait job
+- Fix: Fix small case exceed queue can't be consume but wait for new task
+
 ## Version 1.6.2
 
 _2019-08-01_
