@@ -84,10 +84,17 @@ public final class ExceedWait {
         @Override
         public Runnable take() throws InterruptedException {
             ThreadPoolLog.d(TAG, "take() called");
-            Runnable result = super.take();
-            if (mExceedQueue.size() > 0 && result == null) {
-                result = mExceedQueue.take();
+            // Step 1. check whether there are tasks available on the main queue.
+            Runnable result = super.poll();
+            if (result == null && mExceedQueue.size() > 0) {
+                result = mExceedQueue.poll();
             }
+
+            // Step 2. if there isn't any task whether on the core main exceed queue, take to wait.
+            if (result == null) {
+                result = super.take();
+            }
+
             ThreadPoolLog.d(TAG, "take() returned: %s", result);
             return result;
         }
